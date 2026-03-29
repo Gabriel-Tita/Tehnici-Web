@@ -1,0 +1,34 @@
+{
+  "name": "mobilehub",
+  "version": "1.0.0",
+  "description": "magazin de telefoane",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gabriel-Tita/Tehnici-Web.git"
+  },
+  "keywords": [
+    "MobileHub",
+    "Magazin",
+    "de",
+    "telefoane",
+    "telefoane",
+    "Samsung",
+    "Apple",
+    "Motorola",
+    "Oppo"
+  ],
+  "author": "Tita Stefan-Gabriel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gabriel-Tita/Tehnici-Web/issues"
+  },
+  "homepage": "https://github.com/Gabriel-Tita/Tehnici-Web#readme",
+  "dependencies": {
+    "ejs": "^5.0.1",
+    "express": "^5.2.1"
+  }
+}

@@ -1,0 +1,122 @@
+ul.meniu ul, ul.meniu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav {
+  --culoare_fundal2: #66FAE8;
+  --culoare3: #66AEFA;
+  --culoare_iconite: #66DCFA;
+  --culoare_hover: #66FAB5;
+  --culoare_borduri: #667FFA;
+  --culoare_fundal: #F4F8F9;
+  --culoare_plus: black;
+  --inaltime_buton: 25px;
+}
+
+#hamburger,
+#ch-menu {
+  display: none;
+}
+
+ul.meniu {
+  display: flex;
+  position: relative;
+}
+ul.meniu ul {
+  display: none;
+  animation: animatie_submeniu 1s linear !important;
+  transform-origin: center top;
+}
+ul.meniu li {
+  cursor: pointer;
+  width: 150px;
+  height: var(--inaltime_buton);
+  background-color: var(--culoare_borduri);
+  /* border: 1px solid var(--culoare3); */
+  color: black;
+  text-align: center;
+  line-height: var(--inaltime_buton);
+  /*text-decoration: none;*/
+  transition: all 1s linear;
+  border-radius: 10px;
+}
+ul.meniu li:hover {
+  color: var(--culoare_fundal);
+}
+ul.meniu li:hover ul {
+  display: block;
+  position: absolute;
+  z-index: 10;
+}
+ul.meniu a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes animatie_submeniu {
+  0% {
+    opacity: 0;
+    transform: scale(0, 0);
+  }
+  50% {
+    transform: scale(0.5, 0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+}
+.text-icon,
+.imag-icon {
+  display: inline-block;
+}
+
+#acasa {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease, visibility 1s;
+}
+
+.animatie-acasa:hover #acasa {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hamburger-container {
+  width: 40px;
+  height: 30px;
+  position: relative;
+  cursor: pointer;
+  background: transparent;
+}
+
+.bar {
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: var(--culoare_fundal);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.bar:nth-child(1) {
+  top: 10%;
+}
+
+.bar:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.bar:nth-child(3) {
+  bottom: 10%;
+}
+
+/*# sourceMappingURL=nav.css.map */

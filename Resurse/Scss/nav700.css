@@ -1,0 +1,206 @@
+ul.meniu {
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  -webkit-mask-size: 100% 200%;
+  mask-size: 100% 200%;
+  -webkit-mask-position: 0 100%;
+}
+
+nav {
+  --culoare_fundal2: #66FAE8;
+  --culoare3: #66AEFA;
+  --culoare_iconite: #66DCFA;
+  --culoare_hover: #66FAB5;
+  --culoare_borduri: #667FFA;
+  --culoare_fundal: #F4F8F9;
+  --culoare_plus: black;
+  --latime_buton: 150px;
+  --inaltime_buton: 25px;
+}
+
+#hamburger {
+  display: block;
+}
+#hamburger > img {
+  height: 2em;
+  width: auto;
+}
+
+ul.meniu {
+  display: none;
+}
+ul.meniu ul {
+  width: 100%;
+}
+ul.meniu li {
+  width: 100%;
+}
+
+#ch-menu:checked + ul.meniu {
+  display: block;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+#acasa {
+  display: none;
+}
+
+.text-icon {
+  display: inline-block;
+}
+
+ul.meniu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  transition: max-height 5.5s ease, visibility 2.5s, mask-position 0.5s ease-in-out, -webkit-mask-position 1.3s ease-in-out;
+}
+ul.meniu li {
+  position: relative;
+  height: auto;
+  min-height: var(--inaltime_buton);
+}
+ul.meniu ul {
+  display: none;
+  animation: animatie_submeniu2 1s linear !important;
+  transform-origin: center top;
+}
+
+#ch-menu:checked + ul.meniu {
+  max-height: 100vh;
+  visibility: visible;
+  -webkit-mask-position: 0 0;
+  mask-position: 0 0;
+}
+
+ul.meniu li:hover > ul {
+  display: block !important;
+  position: static !important;
+  visibility: visible;
+  opacity: 1;
+}
+
+#ch-menu:checked + ul.meniu #acasa-meniu {
+  display: inline-block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+ul.meniu li:hover {
+  color: var(--culoare_fundal) !important;
+}
+
+@keyframes animatie_submeniu2 {
+  0% {
+    opacity: 0;
+    transform: scale(0, 0);
+  }
+  50% {
+    transform: scale(0.5, 0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+}
+.hamburger-container {
+  width: 40px;
+  height: 30px;
+  position: relative;
+  cursor: pointer;
+  background: transparent;
+}
+
+.bar {
+  display: block;
+  position: absolute;
+  left: 0;
+  --offset: 0%;
+  width: 100%;
+  height: 4px;
+  background-color: var(--culoare_fundal);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  animation-duration: 1.2s !important;
+  animation-timing-function: ease-in-out !important;
+}
+.bar:nth-child(1) {
+  animation-delay: 0ms !important;
+  top: 10%;
+  animation-name: aparitieBaraJos !important;
+}
+.bar:nth-child(2) {
+  animation-delay: 300ms !important;
+  top: 50%;
+  transform: translateY(-50%);
+  animation-name: aparitieBaraMijloc !important;
+}
+.bar:nth-child(3) {
+  animation-delay: 600ms !important;
+  bottom: 10%;
+  animation-name: aparitieBaraSus !important;
+}
+
+@keyframes aparitieBaraJos {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0) rotate(0deg);
+    background-color: #ff0000;
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(0) scale(1.2) rotate(270deg);
+    background-color: #00ff00;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(360deg);
+    background-color: var(--culoare_fundal);
+  }
+}
+@keyframes aparitieBaraMijloc {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%) scale(0) rotate(0deg);
+    background-color: #ff0000;
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(-50%) scale(1.5) rotate(180deg);
+    background-color: #00ff00;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1) rotate(360deg);
+    background-color: var(--culoare_fundal);
+  }
+}
+@keyframes aparitieBaraSus {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0) rotate(0deg);
+    background-color: #00ff00;
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(0) scale(1.2) rotate(270deg);
+    background-color: #ff0000;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(360deg);
+    background-color: var(--culoare_fundal);
+  }
+}
+ul.meniu > li:hover ul {
+  display: block;
+  position: absolute;
+  z-index: 10;
+}
+
+/*# sourceMappingURL=nav700.css.map */

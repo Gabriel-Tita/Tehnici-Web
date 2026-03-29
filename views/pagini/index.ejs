@@ -2,84 +2,20 @@
 <html lang="ro">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="MobileHub, Magazin de telefoane, telefoane, Samsung, Apple, Motorola, Oppo">
+    <title> MobileHub </title>
     <meta name="description" content="Locul ideal de unde sa achizitionati pentru cele mai noi 
         telefoane, la preturi competitive.">
-    <meta name="author" content="Tiță Ștefan-Gabriel">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> MobileHub </title>
-    <link rel="icon" type="image/png" href="./Resurse/Imagini/Favicon/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="./Resurse/Imagini/Favicon/favicon.svg" />
-    <link rel="shortcut icon" href="./Resurse/Imagini/Favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./Resurse/Imagini/Favicon/apple-touch-icon.png" />
-    <link rel="manifest" href="./Resurse/Imagini/Favicon/site.webmanifest" />
-    <!-- in node tot ce e ./ devine /-->
-    <link rel="stylesheet" href="./Resurse/CSS/reset1.css" type="text/css" />
-    <link rel="stylesheet" href="./Resurse/CSS/general.css" type="text/css" />
-    <link rel="stylesheet" href="./Resurse/Scss/nav.css" type="text/css" />
-    <link rel="stylesheet" href="./Resurse/Scss/nav1200.css" type="text/css" media="screen and (max-width: 1200px)"/>
-    <link rel="stylesheet" href="./Resurse/Scss/nav700.css" type="text/css" media="screen and (max-width: 700px)"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double+Ink:wght@100..900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="keywords" content="MobileHub, Magazin de telefoane, telefoane, Samsung, Apple, Motorola, Oppo">
+    
+    <%- include('../fragmente/head.ejs') %>
 </head>
 
 <body id="top">
-    <header>
-        <h1> MobileHub </h1>
-        <img src="Resurse/Imagini/sunriseforever-smartphone-4103051_1920.jpg" height=50 width=50 alt="Sigla" />
-        <nav>
-            <label id="hamburger" for="ch-menu">
-                <div class="hamburger-container">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-                </div>
-            </label>
-            <input type="checkbox" id="ch-menu"/>
-            <ul class="meniu">
-                <li>
-                    <div class="animatie-acasa">
-                    <a href="#top"><div class="text-icon" id="acasa">Acasa&nbsp;</div><div class="imag-icon" id="acasa-meniu">
-                        <span class="fa-solid fa-house"></span>
-                    </div></a>
-                    </div>
-                    
-                    <ul>
-                        <li><a href="#welcome">Bine ati venit</a></li>
-                        <li><a href="#promotii">Promotii</a></li>
-                        <li><a href="#produse">Produse</a></li>
-                        <li><a href="#orar">Orar</a></li>
-                        <li><a href="#anunturi">Anunturi</a></li>
-                        <li><a href="#intrebari">Intrebari</a></li>
-                        <li><a href="#video-uri">Videoclipuri utile</a></li>
-                    </ul>
-
-
-                </li>
-                <li>
-                    <div><div class="text-icon">Magazin&nbsp;</div><div class="imag-icon"><span class="fa-solid fa-mobile"></span></div></div>
-                    <ul>
-                        <li><a href="Magazin.html#Toate">Toate Telefoanele</a></li>
-                        <li><a href="Magazin.html#Samsung">Samsung</a></li>
-                        <li><a href="Magazin.html#Apple">Apple</a></li>
-                        <li><a href="Magazin.html#Motorola">Motorola</a></li>
-                        <li><a href="Magazin.html#Oppo">Oppo</a></li>
-                    </ul>
-                </li>
-                <li><a href="Cos.html"><div class="text-icon">Cos de cumparaturi&nbsp;  </div><div class="imag-icon"><span class="fa-solid fa-cart-shopping"></span></div></a></li>
-                <li><a href="Contact.html"><div class="text-icon">Contact&nbsp;</div><div class="imag-icon"><span class="fa-regular fa-address-card"></span></div></a></li>
-            </ul>
-        </nav>
-    </header>
     <main>
+        <%- include('../fragmente/header.ejs') %>
         <div id="grid-pagina">
             <div id="pre-wel">
-                <section id="prezentare" class="grid-item">
+                <section id="prezentare">
                     <p>
                         <b>MobileHub</b> este magazinul de telefoane ideal de unde sa achizitionati cele mai noi
                         dispozitive, si nu
@@ -106,7 +42,7 @@
                         <span> 9 vizitatori (Activitate scăzută)</span>
                     </div>
                 </section>
-                <section id="welcome" class="grid-item">
+                <section id="welcome">
                     <hgroup>
                         <h2>Bine ati venit</h2>
                         <p class="subtitlu">Prezentarea magazinului</p>
@@ -150,7 +86,7 @@
                     </div>
                 </section>
             </div>
-            <div id="promotii-si-altele" class="grid-item">
+            <div id="promotii-si-altele">
                 <section id="promotii">
                     <h2>Promoții și oferte</h2>
                     <article>
@@ -343,7 +279,7 @@
                     </iframe>
                 </section>
             </div>
-            <div id="orar-intrebari" class="grid-item">
+            <div id="orar-intrebari">
                 <section id="orar">
                     <h2>Orar</h2>
                     <div id="tabel">
@@ -477,7 +413,7 @@
                     </details>
                 </section>
             </div>
-            <section id="site" class="grid-item">
+            <section id="site">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed risus sem, posuere ac fringilla non,
                     rutrum sed nunc. Aenean congue pharetra elementum. Proin ac felis faucibus, commodo arcu in,
                     placerat neque. Nunc imperdiet augue ex, ac tincidunt mi fringilla quis. Donec et bibendum quam.
@@ -488,7 +424,7 @@
                     elit vel eros. Nulla pellentesque, mi sed auctor pharetra, dolor felis aliquam quam, in malesuada
                     augue neque eget quam.
             </section>
-            <section id="lista_utilizatori_online" class="grid-item">
+            <section id="lista_utilizatori_online">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed risus sem, posuere ac fringilla non,
                     rutrum sed nunc. Aenean congue pharetra elementum. Proin ac felis faucibus, commodo arcu in,
                     placerat neque. Nunc imperdiet augue ex, ac tincidunt mi fringilla quis. Donec et bibendum quam.
@@ -542,7 +478,7 @@
                     Vivamus sed auctor ligula, sed varius mauris. Praesent enim risus, efficitur eu commodo eu,
                     tincidunt vel ligula.</p>
             </section>
-            <section id="anunturi" class="grid-item">
+            <section id="anunturi">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed risus sem, posuere ac fringilla non,
                     rutrum sed nunc. Aenean congue pharetra elementum. Proin ac felis faucibus, commodo arcu in,
                     placerat neque. Nunc imperdiet augue ex, ac tincidunt mi fringilla quis. Donec et bibendum quam.
@@ -562,7 +498,7 @@
                     elit vel eros. Nulla pellentesque, mi sed auctor pharetra, dolor felis aliquam quam, in malesuada
                     augue neque eget quam.</p>
             </section>
-            <section id="statistici" class="grid-item">
+            <section id="statistici">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed risus sem, posuere ac fringilla non,
                     rutrum sed nunc. Aenean congue pharetra elementum. Proin ac felis faucibus, commodo arcu in,
                     placerat neque. Nunc imperdiet augue ex, ac tincidunt mi fringilla quis. Donec et bibendum quam.
@@ -694,7 +630,7 @@
                     tincidunt vel ligula.
                 </p>
             </section>
-            <section id="calendar" class="grid-item">
+            <section id="calendar">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed risus sem, posuere ac fringilla non,
                     rutrum sed nunc. Aenean congue pharetra elementum. Proin ac felis faucibus, commodo arcu in,
                     placerat neque. Nunc imperdiet augue ex, ac tincidunt mi fringilla quis. Donec et bibendum quam.
@@ -717,41 +653,7 @@
             </section>
         </div>
     </main>
-    <footer>
-        <address>
-            <strong>MobileHub - Magazinul tău de încredere</strong><br><br>
-            <div id="banner-scolar">Acesta este un proiect școlar.</div>
-
-            <a href="https://www.bing.com/maps/search?FORM=HDRSC6&q=facultatea+de+matematic%C4%83+%C8%99i+informatic%C4%83&cp=44.435425%7E26.099838&lvl=16&style=r"
-                target="_blank" rel="noopener">
-                Strada Prevederii, Nr. 13,<br>
-                Sector 3, București,<br>
-                Cod Poștal 010014
-            </a><br><br>
-
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.866380608775!2d26.09904437664654!3d44.43588960144572!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1ff462f47f047%3A0x493984726f0235f9!2sFacultatea%20de%20Matematic%C4%83%20%C8%99i%20Informatic%C4%83!5e0!3m2!1sro!2sro!4v1709940000000!5m2!1sro!2sro"
-                width="300" height="225" style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-
-            Telefon: <a href="tel:+40726000123">+40 726 010 143</a><br>
-
-            E-mail: <a href="mailto:office@mobilehub.ro">office@mobilehub.ro</a><br><br>
-
-            Contact rapid:
-            <a href="https://wa.me/40726000123" target="_blank" rel="noopener">
-                <span class="fab fa-whatsapp"></span> Chat pe WhatsApp
-            </a>
-        </address>
-        <hr>
-        <small>
-            &copy; 2025 MobileHub. Toate drepturile rezervate.
-            Pagina a fost creată la data de:
-            <time datetime="2026-03-08">1 iunie 2025</time>
-        </small>
-        <div id="watermark"> Tiță Ștefan-Gabriel </div>
-    </footer>
+    <%- include('../fragmente/footer.ejs') %>
     <a href="#top" id="link-top" title="Sari la începutul paginii">
         <div class="triunghi"></div>
         <span class="tooltip">Mergi sus</span>
