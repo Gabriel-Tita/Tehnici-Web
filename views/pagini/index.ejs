@@ -3,19 +3,22 @@
 
 <head>
     <title> MobileHub </title>
+    <meta name="keywords" content="MobileHub, Magazin de telefoane, telefoane, Samsung, Apple, Motorola, Oppo">
     <meta name="description" content="Locul ideal de unde sa achizitionati pentru cele mai noi 
         telefoane, la preturi competitive.">
-    <meta name="keywords" content="MobileHub, Magazin de telefoane, telefoane, Samsung, Apple, Motorola, Oppo">
     
     <%- include('../fragmente/head.ejs') %>
+
 </head>
 
 <body id="top">
+
+    <%- include('../fragmente/header.ejs') %>
+
     <main>
-        <%- include('../fragmente/header.ejs') %>
         <div id="grid-pagina">
             <div id="pre-wel">
-                <section id="prezentare">
+                <section id="prezentare" class="grid-item">
                     <p>
                         <b>MobileHub</b> este magazinul de telefoane ideal de unde sa achizitionati cele mai noi
                         dispozitive, si nu
@@ -42,7 +45,7 @@
                         <span> 9 vizitatori (Activitate scăzută)</span>
                     </div>
                 </section>
-                <section id="welcome">
+                <section id="welcome" class="grid-item">
                     <hgroup>
                         <h2>Bine ati venit</h2>
                         <p class="subtitlu">Prezentarea magazinului</p>
@@ -50,11 +53,11 @@
                     <figure>
                         <picture>
                             <!-- il ia pe primul care se potriveste cu query-ul din media-->
-                            <source srcset="./Resurse/Imagini/imagine-prezentare-ecran-telefon.jpg"
+                            <source srcset="/Resurse/Imagini/imagine-prezentare-ecran-telefon.jpg"
                                 media="(max-width:700px)" title="Imagine telefon" />
-                            <source srcset="./Resurse/Imagini/imagine-prezentare-ecran-tableta.jpg"
+                            <source srcset="/Resurse/Imagini/imagine-prezentare-ecran-tableta.jpg"
                                 media="(max-width:1200px)" title="Imagine telefon" />
-                            <img src="./Resurse/Imagini/imagine-prezentare-ecran-desktop.jpg" title="Imagine telefon" />
+                            <img src="/Resurse/Imagini/imagine-prezentare-ecran-desktop.jpg" title="Imagine telefon" />
                         </picture>
                         <figcaption>Imagine telefon</figcaption>
                     </figure>
@@ -78,15 +81,15 @@
                         <div id="dv-prezentare">
                             <picture>
                                 <!-- il ia pe primul care se potriveste cu query-ul din media-->
-                                <source srcset="./Resurse/Imagini/imagine1-telefon.jpg" media="(max-width:700px)" />
-                                <source srcset="./Resurse/Imagini/imagine1-tableta.jpg" media="(max-width:1200px)" />
-                                <img src="./Resurse/Imagini/imagine1-desktop.jpg" alt="text" />
+                                <source srcset="/Resurse/Imagini/imagine1-telefon.jpg" media="(max-width:700px)" />
+                                <source srcset="/Resurse/Imagini/imagine1-tableta.jpg" media="(max-width:1200px)" />
+                                <img src="/Resurse/Imagini/imagine1-desktop.jpg" alt="text" />
                             </picture>
                         </div>
                     </div>
                 </section>
             </div>
-            <div id="promotii-si-altele">
+            <div id="promotii-si-altele" class="grid-item">
                 <section id="promotii">
                     <h2>Promoții și oferte</h2>
                     <article>
@@ -100,9 +103,9 @@
                     <h2>Produse noi</h2>
                     <picture>
                         <!-- il ia pe primul care se potriveste cu query-ul din media-->
-                        <source srcset="./Resurse/Imagini/imagine2-telefon.jpg" media="(max-width:700px)" />
-                        <source srcset="./Resurse/Imagini/imagine2-tableta.jpg" media="(max-width:1200px)" />
-                        <img src="./Resurse/Imagini/imagine2-desktop.jpg" alt="text" />
+                        <source srcset="/Resurse/Imagini/imagine2-telefon.jpg" media="(max-width:700px)" />
+                        <source srcset="/Resurse/Imagini/imagine2-tableta.jpg" media="(max-width:1200px)" />
+                        <img src="/Resurse/Imagini/imagine2-desktop.jpg" alt="text" />
                     </picture>
                     <article>
                         <h3>Samsung Galaxy S26</h3>
@@ -198,15 +201,15 @@
 
                             <h4>Vizualizare detaliată Samsung Galaxy S26 Ultra</h4>
 
-                            <a href="./Resurse/Imagini/S26Ultra.jpg">
-                                <img src="./Resurse/Imagini/S26Ultra-thumbnail.jpg"
+                            <a href="/Resurse/Imagini/S26Ultra.jpg">
+                                <img src="/Resurse/Imagini/S26Ultra-thumbnail.jpg"
                                     title="Click pentru a mări imaginea">
                             </a>
                             <p><small>Sfat: Faceți click pe poză pentru a vedea telefonul la o rezolutie mai
                                     buna.</small>
                             </p>
 
-                            <a href="./Resurse/Imagini/S26Ultra.jpg" download="image-S26Ultra.jpg">
+                            <a href="/Resurse/Imagini/S26Ultra.jpg" download="image-S26Ultra.jpg">
                                 <span class="fas fa-download"></span> Descarca imaginea cu S26 Ultra!
                             </a>
 
@@ -214,7 +217,7 @@
                                 <h3>Explorați componentele S26 Ultra</h3>
                                 <p>Faceți click pe camere sau pe zona de încărcare pentru detalii:</p>
 
-                                <img src="./Resurse/Imagini/S25-Utra-map.jpg" usemap="#s26-map"
+                                <img src="/Resurse/Imagini/S25-Utra-map.jpg" usemap="#s26-map"
                                     alt="Samsung Galaxy S26 Ultra spate" width="450" height="800">
 
                                 <map name="s26-map">
@@ -237,7 +240,7 @@
                 </section>
                 <section id="pdf">
                     <h2 id="pdf">Manual de utilizare</h2>
-                    <embed src="./Documente/manual-s26-ultra.pdf" type="application/pdf" width="512" height="320">
+                    <embed src="/Resurse/Documente/manual-s26-ultra.pdf" type="application/pdf" width="512" height="320">
                 </section>
                 <section id="video-uri">
                     <h2>Videoclipuri utile</h2>
@@ -277,9 +280,33 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen>
                     </iframe>
+
+                    <h2>Prezentare Tehnologie MobileHub</h2>
+                    
+                    <video controls 
+                        poster="Resurse/Imagini/poster.png" 
+                        preload="auto" 
+                        class="video-responsiv">
+                        
+                        <source src="Resurse/Videoclipuri/video.mp4" type="video/mp4">
+                        <source src="Resurse/Videoclipuri/video.webm" type="video/webm">
+                        
+                        <track src="Resurse/Videoclipuri/Tracks/videoro.vtt" 
+                            kind="subtitles" 
+                            srclang="ro" 
+                            label="Română" 
+                            default>
+                        
+                        <track src="Resurse/Videoclipuri/Tracks/videoen.vtt" 
+                            kind="subtitles" 
+                            srclang="en" 
+                            label="Engleză">
+
+                        Browserul tău nu suportă redarea videoclipurilor HTML5.
+                    </video>
                 </section>
             </div>
-            <div id="orar-intrebari">
+            <div id="orar-intrebari" class="grid-item">
                 <section id="orar">
                     <h2>Orar</h2>
                     <div id="tabel">
@@ -413,7 +440,7 @@
                     </details>
                 </section>
             </div>
-            <section id="site">
+            <section id="site" class="grid-item">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed risus sem, posuere ac fringilla non,
                     rutrum sed nunc. Aenean congue pharetra elementum. Proin ac felis faucibus, commodo arcu in,
                     placerat neque. Nunc imperdiet augue ex, ac tincidunt mi fringilla quis. Donec et bibendum quam.
@@ -424,61 +451,10 @@
                     elit vel eros. Nulla pellentesque, mi sed auctor pharetra, dolor felis aliquam quam, in malesuada
                     augue neque eget quam.
             </section>
-            <section id="lista_utilizatori_online">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed risus sem, posuere ac fringilla non,
-                    rutrum sed nunc. Aenean congue pharetra elementum. Proin ac felis faucibus, commodo arcu in,
-                    placerat neque. Nunc imperdiet augue ex, ac tincidunt mi fringilla quis. Donec et bibendum quam.
-                    Nulla id ligula eu enim aliquet sagittis nec eu nulla. Praesent varius dignissim augue, mollis
-                    imperdiet metus posuere iaculis. Cras sed urna vel nulla consectetur vestibulum. Phasellus
-                    sollicitudin, quam a accumsan commodo, nibh magna ultricies dui, nec dictum urna arcu eget urna.
-                    Pellentesque fringilla, augue eget cursus bibendum, mi enim dictum purus, sit amet hendrerit velit
-                    elit vel eros. Nulla pellentesque, mi sed auctor pharetra, dolor felis aliquam quam, in malesuada
-                    augue neque eget quam.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed risus sem, posuere ac fringilla non,
-                    rutrum sed nunc. Aenean congue pharetra elementum. Proin ac felis faucibus, commodo arcu in,
-                    placerat neque. Nunc imperdiet augue ex, ac tincidunt mi fringilla quis. Donec et bibendum quam.
-                    Nulla id ligula eu enim aliquet sagittis nec eu nulla. Praesent varius dignissim augue, mollis
-                    imperdiet metus posuere iaculis. Cras sed urna vel nulla consectetur vestibulum. Phasellus
-                    sollicitudin, quam a accumsan commodo, nibh magna ultricies dui, nec dictum urna arcu eget urna.
-                    Pellentesque fringilla, augue eget cursus bibendum, mi enim dictum purus, sit amet hendrerit velit
-                    elit vel eros. Nulla pellentesque, mi sed auctor pharetra, dolor felis aliquam quam, in malesuada
-                    augue neque eget quam.
-                    Curabitur tincidunt ac ante quis fermentum. Pellentesque habitant morbi tristique senectus et netus
-                    et malesuada fames ac turpis egestas. Aliquam pulvinar, tortor eget luctus ultrices, odio elit
-                    vestibulum leo, non suscipit magna lorem sit amet neque. Aliquam commodo aliquet dolor non varius.
-                    Nulla vel velit luctus, egestas massa ut, semper erat. Orci varius natoque penatibus et magnis dis
-                    parturient montes, nascetur ridiculus mus. Phasellus laoreet fringilla eros vitae accumsan.
-                    Suspendisse finibus feugiat urna. Cras cursus tristique magna sed vulputate. Nullam scelerisque
-                    porta velit. Maecenas in pulvinar ante, sit amet sollicitudin ipsum.
-
-                    Fusce euismod sagittis diam, eu sollicitudin turpis consectetur sodales. Vivamus venenatis varius
-                    suscipit. Fusce id mi sagittis, mattis leo nec, accumsan urna. Curabitur a nisl pellentesque,
-                    dapibus lectus vel, accumsan turpis. Sed ligula ex, ullamcorper ac turpis quis, facilisis tempor
-                    justo. Proin vel purus nec odio hendrerit elementum. Sed laoreet ex sed iaculis pharetra. Aenean eu
-                    nisl diam. Fusce nec arcu dolor. Vivamus ultrices ligula mattis felis pulvinar maximus. Pellentesque
-                    vulputate erat vitae felis volutpat euismod eu ac turpis. Quisque lacinia nunc eget ex rutrum
-                    bibendum.
-
-                    Donec scelerisque est congue, aliquet purus at, dignissim neque. Praesent tincidunt ex sit amet eros
-                    ultricies fringilla in faucibus risus. Nullam vel mattis ligula. Phasellus efficitur ipsum ut odio
-                    aliquet, ut tristique nunc pellentesque. Etiam maximus nunc vitae arcu suscipit posuere. Mauris sed
-                    egestas nisi, in fringilla dui. Nam lobortis, metus euismod lobortis semper, odio erat viverra ante,
-                    non tristique magna enim eu quam. Integer non scelerisque turpis. Nullam et tortor dictum, mattis
-                    erat vel, venenatis diam. Proin eros arcu, posuere quis egestas non, molestie in mi. Nullam
-                    vulputate purus magna, in aliquet orci mollis a. Ut rhoncus quam sit amet est sagittis egestas.
-                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                    Maecenas dolor neque, pretium sed ipsum non, tristique fermentum felis. Sed sed elementum enim.
-
-                    In ut metus enim. Sed pellentesque aliquam turpis ut malesuada. Donec vulputate, turpis at facilisis
-                    blandit, nibh est finibus orci, vitae ullamcorper magna sapien sit amet risus. Suspendisse ut
-                    pharetra ipsum, quis malesuada risus. Aliquam placerat purus in blandit aliquam. Integer sagittis
-                    gravida lectus, in lobortis nulla viverra fringilla. Phasellus gravida, purus at vulputate
-                    vulputate, metus tortor fringilla arcu, ut ultrices velit nisl quis nunc. Maecenas quis tincidunt
-                    metus, ut cursus dui. Quisque magna lacus, bibendum in ullamcorper non, sagittis vitae magna.
-                    Vivamus sed auctor ligula, sed varius mauris. Praesent enim risus, efficitur eu commodo eu,
-                    tincidunt vel ligula.</p>
+            <section id="lista_utilizatori_online" class="grid-item">
+                <p>IP: <%- locals.ip %></p>
             </section>
-            <section id="anunturi">
+            <section id="anunturi" class="grid-item">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed risus sem, posuere ac fringilla non,
                     rutrum sed nunc. Aenean congue pharetra elementum. Proin ac felis faucibus, commodo arcu in,
                     placerat neque. Nunc imperdiet augue ex, ac tincidunt mi fringilla quis. Donec et bibendum quam.
@@ -498,7 +474,7 @@
                     elit vel eros. Nulla pellentesque, mi sed auctor pharetra, dolor felis aliquam quam, in malesuada
                     augue neque eget quam.</p>
             </section>
-            <section id="statistici">
+            <section id="statistici" class="grid-item">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed risus sem, posuere ac fringilla non,
                     rutrum sed nunc. Aenean congue pharetra elementum. Proin ac felis faucibus, commodo arcu in,
                     placerat neque. Nunc imperdiet augue ex, ac tincidunt mi fringilla quis. Donec et bibendum quam.
@@ -630,7 +606,7 @@
                     tincidunt vel ligula.
                 </p>
             </section>
-            <section id="calendar">
+            <section id="calendar" class="grid-item">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed risus sem, posuere ac fringilla non,
                     rutrum sed nunc. Aenean congue pharetra elementum. Proin ac felis faucibus, commodo arcu in,
                     placerat neque. Nunc imperdiet augue ex, ac tincidunt mi fringilla quis. Donec et bibendum quam.
@@ -653,7 +629,9 @@
             </section>
         </div>
     </main>
+
     <%- include('../fragmente/footer.ejs') %>
+
     <a href="#top" id="link-top" title="Sari la începutul paginii">
         <div class="triunghi"></div>
         <span class="tooltip">Mergi sus</span>

@@ -1,1 +1,5 @@
 node_modules/ 
+backup/
+logs/
+temp/
+fisiere_uploadate/

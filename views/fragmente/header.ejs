@@ -1,10 +1,23 @@
-<header>
+    <header>
         <h1> MobileHub </h1>
-        <img src="Resurse/Imagini/sunriseforever-smartphone-4103051_1920.jpg" height=50 width=50 alt="Sigla" />
+        <img src="/Resurse/Imagini/sunriseforever-smartphone-4103051_1920.jpg" height=50 width=50 alt="Sigla" />
         <nav>
+            <label id="hamburger" for="ch-menu">
+                <div class="hamburger-container">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                </div>
+            </label>
+            <input type="checkbox" id="ch-menu"/>
             <ul class="meniu">
                 <li>
-                    <div id="acasa">Acasa</div>
+                    <div class="animatie-acasa">
+                    <a href="home"><div class="text-icon" id="acasa">Acasa&nbsp;</div><div class="imag-icon" id="acasa-meniu">
+                        <span class="fa-solid fa-house"></span>
+                    </div></a>
+                    </div>
+                    
                     <ul>
                         <li><a href="#welcome">Bine ati venit</a></li>
                         <li><a href="#promotii">Promotii</a></li>
@@ -18,7 +31,7 @@
 
                 </li>
                 <li>
-                    <div>Magazin</div>
+                    <div><div class="text-icon">Magazin&nbsp;</div><div class="imag-icon"><span class="fa-solid fa-mobile"></span></div></div>
                     <ul>
                         <li><a href="Magazin.html#Toate">Toate Telefoanele</a></li>
                         <li><a href="Magazin.html#Samsung">Samsung</a></li>
@@ -27,8 +40,8 @@
                         <li><a href="Magazin.html#Oppo">Oppo</a></li>
                     </ul>
                 </li>
-                <li><a href="Cos.html">Cos de cumparaturi</a></li>
-                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="Cos.html"><div class="text-icon">Cos de cumparaturi&nbsp;  </div><div class="imag-icon"><span class="fa-solid fa-cart-shopping"></span></div></a></li>
+                <li><a href="despre"><div class="text-icon">Contact&nbsp;</div><div class="imag-icon"><span class="fa-regular fa-address-card"></span></div></a></li>
             </ul>
         </nav>
     </header>

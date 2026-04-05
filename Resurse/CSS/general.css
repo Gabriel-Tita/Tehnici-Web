@@ -324,6 +324,74 @@ math msqrt {
     display: none;
 }
 
+a:visited{
+    color: var(--culoare_fundal);
+}
+
+a[href^="http"]::before {
+    content: "⮳";
+    display: inline-block;
+    font-size: 1.5em;
+    margin-right: 0.3em;
+    vertical-align: middle;
+    color: var(--culoare_borduri); 
+}
+
+a[href^="http"]:hover::before{
+    color: var(--culoare_fundal);
+}
+
+main a {
+    /* 2. Definirea gradientului radial (Pata de culoare) */
+    /* c1 la 0% și 40%, transparent la 80% și 100% */
+    background-image: radial-gradient( 
+        var(--culoare_borduri) 0%, 
+        var(--culoare_borduri) 40%, 
+        transparent 80%, 
+        transparent 100%
+    );
+
+    /* 3. Poziționare și dimensiune inițială */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 0 0; /* Pata este invizibilă la început */
+
+    /* 4. Tranziția pentru creștere și micșorare */
+    transition: background-size 0.5s ease-in-out, color 0.3s;
+}
+
+/* 5. Starea la Hover */
+main a:hover {
+    background-size: 100% 100%; /* Creștem la 100% sau mai mult pentru a acoperi tot linkul */
+}
+
+main a:hover{
+    border: 1px solid black;
+}
+
+.video-responsiv {
+    width: 90%;          /* Ocupă 90% din lățimea ecranului pe mobil */
+    max-width: 800px;    /* Nu depășește 800px pe ecrane mari (desktop) */
+    min-width: 300px;    /* Nu scade sub 300px pe ecrane foarte mici */
+    height: auto;        /* Menține proporția imaginii */
+    display: block;
+    margin: 20px auto;   /* Îl centrează în pagină */
+    border: 3px solid var(--culoare_borduri);
+}
+
+video::cue {
+    /* Gradient de la o culoare închisă la alta */
+    background-image: linear-gradient(to bottom, var(--culoare_borduri), blue);
+    
+    color: transparent; /* Textul devine transparent pentru a vedea gradientul */
+    -webkit-background-clip: text;
+    background-clip: text;
+    
+    background-color: transparent; /* Scoatem fundalul negru implicit al subtitrării */
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
 @media screen and (max-width: 1200px) {
     * {
         animation: none !important;
