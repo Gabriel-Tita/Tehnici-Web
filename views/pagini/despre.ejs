@@ -16,13 +16,18 @@
 
     <%- include('../fragmente/header.ejs') %>
 
-    <main>
+    <main class="main-despre">
         <h2> Informatii despre magazinul nostru</h2>
-        <h3 class="subtitlu">Contact</h3>
+        <!-- <h3 class="subtitlu">Contact</h3> -->
+        <div class="reflexie-box">
+    <div class="text-partea stanga">Contact</div>
+    <div class="text-partea dreapta">Contact</div>
+</div>
         <div class = "paragraf">Pentru a orice fel de nelamurile sau intrebare, atat cu privire la site, cat si la produsele noastre si serviciile prestate, va incurajam sa 
             ne contactati telefonic la numarul 0726000123 sau pe e-mail la adresa office@mobilehub.ro. Ne rezervam dreptul de a raspunde oricaror intrebari, 
             fie telefonic sau in scris in termen de 24 de ore.
         </div>
+        <hr id="efect-css-stilizare-hr">
         <h3 class="subtitlu">Despre MobileHub</h3>
         <div class = "paragraf">MobileHub este magazinul de telefoane ideal de unde sa achizitionati cele mai noi
                         dispozitive, si nu
@@ -37,6 +42,19 @@
                         vineri intre
                         orele
                         8:00 - 16:00. Conecteaza-te la tehnologie cu MobileHub!</div>
+
+        
+        <button class="btn btn-primary">Buton cu Border Radius de 20px</button>
+
+        <!-- <div class="alert alert-warning d-md-none">
+            Ești pe un ecran MIC (sub 850px).
+            </div>
+            <div class="alert alert-success d-none d-md-block d-lg-none">
+            Ești pe ecranul tău MEDIU custom (850px - 1150px).
+            </div>
+            <div class="alert alert-danger d-none d-lg-block">
+            Ești pe ecranul tău MARE custom (peste 1150px).
+        </div> -->
     </main>
 
     <%- include('../fragmente/footer.ejs') %>

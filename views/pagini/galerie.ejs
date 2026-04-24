@@ -2,29 +2,17 @@
 <html  lang="ro">
     <head>
         <meta name="description" content="MobileHub este magazinul de telefoane ideal de unde sa achizitionati cele mai noi modele de telefoane la cele mai bune preturi. Oferim o gama larga de produse, servicii excelente si o experienta de cumparaturi placuta.">
-        <meta name="keywords" content="eroare, eroare MobileHub, MobileHub, telefoane, magazin">
-        <title>MobileHub - eroare</title>
-        <link rel="stylesheet" type="text/css" href="/Resurse/CSS/eroare.css" />
+        <meta name="keywords" content="galerie, MobileHub galerie, MobileHub, telefoane, magazin">
+        <title>MobileHub - galerie</title>
         <%- include("../fragmente/head.ejs");  %> 
 
 
     </head>
-    <body>
         
     <%- include("../fragmente/header.ejs");  %> 
-
-    <main>
-        <div id="err-coloane">
-			<div id="err-imag">
-				<img src="<%- locals.imagine %>" />
-			</div>
-			<section>
-				<h2><%- locals.titlu %></h2>
-				<p><%- locals.text %></p>
-			</section>
-		</div>
-    </main>
-    
+    <section  style = "margin: 70px;">
+    <%- include('../fragmente/galerie-imagini.ejs') %>
+    </section>
     <%- include("../fragmente/footer.ejs");  %> 
 
 

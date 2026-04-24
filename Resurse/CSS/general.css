@@ -35,6 +35,15 @@ main video {
         "zona4 zona4 zona3 zona3 zona7";
 }
 
+.grid-galerie>* {
+    background-color: var(--culoare3);
+    border: 3px solid var(--culoare_borduri);
+    border-radius: 15px;
+    box-shadow: 2px 2px 10px rgba(102, 127, 250, 0.1);
+    min-height: 50px;
+    padding: var(--paddig_margini);
+}
+
 #grid-pagina>* {
     background-color: var(--culoare3);
     border: 3px solid var(--culoare_borduri);
@@ -164,51 +173,53 @@ footer {
 }
 
 .fa-link {
-    color: var(--culoare_iconite);
+    color: var(--culoare_iconite) !important;
 }
 
 .container-iframe {
-    display: flex;
-    align-items: flex-end;
-    gap: 0px;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 0px !important;
 }
 
 .iframe-wrapper {
-    border: 8px solid var(--culoare_borduri);
-    border-radius: 5px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-    background: white;
-    width: 350px;
-    height: 190px;
+    border: 8px solid var(--culoare_borduri) !important;
+    border-radius: 5px !important;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3) !important;
+    background: white !important;
+    min-width: 100px !important;
+    width: 350px !important;
+    height: 210px !important;
 }
 
 iframe {
-    display: block;
+    display: block !important;
 }
 
 .taburi-iframe {
-    display: flex;
-    flex-direction: column;
-    gap: 0px;
+    display: flex !important; 
+    flex-direction: column !important;
+    gap: 0px !important;
 }
 
 .tab-links {
-    background-color: var(--culoare_fundal2);
-    padding: 5px 5px 5px 5px;
-    text-align: left;
-    border-radius: 0 20px 0 0;
-    border: 5px solid var(--culoare_borduri);
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
-    box-shadow: inset 3px 3px 3px 3px rgba(0, 0, 0, 0.3);
-    ;
-    width: 150px;
-    transition: 0.3s;
+    /* background-color: var(--culoare_fundal2) !important; */
+    padding: 5px 5px 5px 5px !important;
+    text-align: left !important;
+    border-radius: 0 20px 0 0 !important;
+    border: 5px solid var(--culoare_borduri) !important;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2) !important;
+    box-shadow: inset 3px 3px 3px 3px rgba(0, 0, 0, 0.3) !important;
+    width: 150px !important;
+    transition: 0.3s !important;
+    height: 70px !important;
+    /* color: white; */
 }
 
 .tab-links:hover {
-    border-left: 5px solid var(--culoare3);
-    background: var(--culoare_iconite);
-    color: white;
+    border-left: 5px solid var(--culoare3) !important;
+    background: var(--culoare_iconite) !important;
+    color: white !important;
 }
 
 #link-top {
@@ -372,7 +383,7 @@ main a:hover{
 .video-responsiv {
     width: 90%;          /* Ocupă 90% din lățimea ecranului pe mobil */
     max-width: 800px;    /* Nu depășește 800px pe ecrane mari (desktop) */
-    min-width: 300px;    /* Nu scade sub 300px pe ecrane foarte mici */
+    min-width: 150px;    /* Nu scade sub 300px pe ecrane foarte mici */
     height: auto;        /* Menține proporția imaginii */
     display: block;
     margin: 20px auto;   /* Îl centrează în pagină */

@@ -31,7 +31,7 @@ ul.meniu ul {
 }
 ul.meniu li {
   cursor: pointer;
-  width: 150px;
+  width: 190px;
   height: var(--inaltime_buton);
   background-color: var(--culoare_borduri);
   /* border: 1px solid var(--culoare3); */

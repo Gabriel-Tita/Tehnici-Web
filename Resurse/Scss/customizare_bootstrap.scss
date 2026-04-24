@@ -1,6 +1,39 @@
 @use '../../node_modules/bootstrap/scss/bootstrap.scss' with 
 (
-    $primary: red,
-    $secondary:purple,
+    $primary: #66FAE8,
+    $secondary: #66AEFA,  // Mov pentru tema Secondary
+    $font-family-sans-serif: (Georgia, serif),
+    $font-family-base: (Georgia, serif),
+    $grid-breakpoints: (
+        xs: 100px,
+        sm: 576px,
+        md: 820px,  
+        lg: 1100px,
+        xl: 1250px,
+        xxl: 1400px
+    ),
+
+    $border-radius: 20px,      
+    $border-radius-lg: 40px,
+    $border-radius-sm: 5px, 
     
-)
+    $h1-font-size: 3rem,  
+    $h2-font-size: 2rem,      
+    $h3-font-size: 1.5rem, 
+
+    $spacer: 1.5rem 
+
+);  
+
+.tab-links {
+    background-color: var(--bs-primary) !important;
+    color: white !important;
+}
+
+.main-despre{
+    background-color: var(--bs-secondary) !important;
+}
+
+.btn {
+    // border-radius: 5px !important;
+}

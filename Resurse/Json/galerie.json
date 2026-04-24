@@ -1,0 +1,107 @@
+{
+	"cale_galerie":"Resurse/Imagini/galerie",
+	"imagini": [
+		
+		{
+			"cale_fisier":"clatite.png",
+			"titlu":"Clătite cu dulceață",
+			"alt":"text alternativ imagine",
+			"text_descriere":"Clătite cu dulceață",
+			"luni":["ianuarie","februarie","iunie","octombrie"]
+		},
+		{
+			"cale_fisier":"gogosi.png",
+			"titlu":"Gogoși glazurate",
+			"alt":"text alternativ imagine",
+			"text_descriere":"Gogoși glazurate",
+			"luni":["ianuarie","noiembrie","iunie","martie"]
+		},
+		{
+			"cale_fisier":"tort-scortisoara.png",
+			"titlu":"Tort cu scorțisoară",
+			"alt":"text alternativ imagine",
+			"text_descriere":"Tort cu scorțisoară",
+			"luni":["noiembrie","aprilie", "decembrie"]
+		},
+		{
+			"cale_fisier":"prajitura-ciocolata.png",
+			"titlu":"Prăjitură cu ciocolată",
+			"alt":"text alternativ imagine",
+			"text_descriere":"Prăjitură cu ciocolată",
+			"luni":["noiembrie","aprilie", "decembrie","octombrie"]
+		},
+		{
+			"cale_fisier":"tarta-afine.png",
+			"titlu":"Tartă cu afine",
+			"alt":"text alternativ imagine",
+			"text_descriere":"Tartă cu afine",
+			"luni":["ianuarie","iunie","iulie","august","septembrie"]
+		},
+		{
+			"cale_fisier":"tort-trandafiri.png",
+			"titlu":"Tort special",
+			"alt":"text alternativ imagine",
+			"text_descriere":"Tort special",
+			"luni":["august","septembrie","decembrie"]
+		},
+		{
+			"cale_fisier":"ecran.png",
+			"titlu":"Ecran telefon",
+			"alt":"text alternativ imagine",
+			"text_descriere":"Clătite cu dulceață",
+			"luni":["ianuarie","februarie", "aprilie", "iunie","octombrie"]
+		},
+		{
+			"cale_fisier":"Iphone5.png",
+			"titlu":"Clătite cu dulceață",
+			"alt":"text alternativ imagine",
+			"text_descriere":"Clătite cu dulceață",
+			"luni":["ianuarie","februarie", "aprilie", "iunie","octombrie"]
+		},
+		{
+			"cale_fisier":"Iphone6.png",
+			"titlu":"Clătite cu dulceață",
+			"alt":"text alternativ imagine",
+			"text_descriere":"Clătite cu dulceață",
+			"luni":["ianuarie","februarie", "aprilie", "iunie","octombrie"]
+		},
+		{
+			"cale_fisier":"motorola.png",
+			"titlu":"Clătite cu dulceață",
+			"alt":"text alternativ imagine",
+			"text_descriere":"Clătite cu dulceață",
+			"luni":["ianuarie","februarie", "aprilie", "iunie","octombrie"]
+		},
+		{
+			"cale_fisier":"phone.png",
+			"titlu":"Clătite cu dulceață",
+			"alt":"text alternativ imagine",
+			"text_descriere":"Clătite cu dulceață",
+			"luni":["ianuarie","februarie", "aprilie", "iunie","octombrie"]
+		},
+		{
+			"cale_fisier":"telefon-pliabil.png",
+			"titlu":"Clătite cu dulceață",
+			"alt":"text alternativ imagine",
+			"text_descriere":"Clătite cu dulceață",
+			"luni":["ianuarie","februarie", "aprilie", "iunie","octombrie"]
+		},
+		{
+			"cale_fisier":"telefonrasarit.png",
+			"titlu":"Clătite cu dulceață",
+			"alt":"text alternativ imagine",
+			"text_descriere":"Clătite cu dulceață",
+			"luni":["ianuarie","februarie", "aprilie", "iunie","octombrie"]
+		},
+		{
+			"cale_fisier":"telefonbutoane.png",
+			"titlu":"Clătite cu dulceață",
+			"alt":"text alternativ imagine",
+			"text_descriere":"Clătite cu dulceață",
+			"luni":["ianuarie", "februarie", "aprilie", "iunie","octombrie"],
+			"autor": "Sean MacEntee",
+			"sursa": "https://www.flickr.com/photos/18090920@N07/9914804973",
+			"licenta": "CC-BY 2.0"
+		}
+	]
+}

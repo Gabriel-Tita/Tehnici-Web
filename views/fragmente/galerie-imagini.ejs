@@ -1,0 +1,31 @@
+<div id="galerie-imagini" class="grid-galerie">
+        <% 
+        vectLuni = ["ianuarie", "februarie", "martie", "aprilie", "mai", "iunie", 
+                        "iulie", "august", "septembrie", "octombrie", "noiembrie", "decembrie"];
+        lunaCurenta = vectLuni[(new Date()).getMonth()]; 
+        let nrimg=0;
+        for (let imag of locals.imagini) {     
+            if (imag.luni && imag.luni.includes(lunaCurenta)) { %>
+                <figure>
+                    <picture>
+                        <source srcset="<%- imag.fisier_mic %>" media="(max-width: 700px)">
+                        <source srcset="<%- imag.fisier_mediu %>" media="(max-width: 1100px)">
+                        <img src="<%- imag.cale_fisier %>" 
+                            alt="<%- imag.alt ? imag.alt : imag.nume %>" 
+                            title="<%- imag.text_descriere %>">
+                    </picture>
+                    <figcaption><%- imag.text_descriere %>
+                        <% if (imag.autor && imag.sursa) { %>
+                            <p class="atribuire">
+                                Sursă: <a href="<%- imag.sursa %>" target="_blank"><%- imag.autor %></a> 
+                                (<%- imag.licenta %>)
+                            </p>
+                        <% } %>    
+                    </figcaption>
+                </figure>
+                <%nrimg=nrimg+1;
+                if(nrimg==6){
+                break;}%>
+            <% } 
+        } %>
+</div>

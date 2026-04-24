@@ -4,6 +4,9 @@ const fs=require("fs");
 const sass=require("sass");
 const sharp=require("sharp");
 
+// // const ejs=require('ejs');
+// const pg = require("pg");
+
 app=express();
 app.set("view engine", "ejs")
 
@@ -23,6 +26,25 @@ console.log("Cale fisier", __filename);
 //     res.sendFile(path.join(__dirname, "Resurse/CSS/general.css"))
 // });
 
+// client=new pg.Client({
+//     database:"mobilehub",
+//     user:"gabriel",
+//     password:"gabriel",
+//     host:"localhost",
+//     port:5433
+// })
+
+// client.connect()
+
+// client.query("select * from prajituri where id>3", function(err, rez){
+//     if (err){
+//         console.log("Eroare", err)
+//     }
+//     else{
+//         console.log(rez)
+//     }
+// })
+
 let vect_foldere=[ "temp", "logs", "backup", "fisiere_uploadate" ]
 for (let folder of vect_foldere){
     let caleFolder=path.join(__dirname, folder);
@@ -32,6 +54,8 @@ for (let folder of vect_foldere){
 }
 
 app.use("/Resurse", express.static(path.join(__dirname, "Resurse")));
+
+app.use("/dist", express.static(path.join(__dirname, "/node_modules/bootstrap/dist")));
 
 // app.get("/:a/:b", function(req, res){
 //     res.sendFile(path.join(__dirname, "index.html"));
@@ -44,13 +68,54 @@ app.get("/favicon.ico", function(req, res){
 app.get(["/", "/index", "/home"], function(req, res){
     //res.sendFile(path.join(__dirname, "index.html"));
     res.render("pagini/index", {
-        ip: req.ip
+        ip: req.ip,
+        imagini: obGlobal.obImagini.imagini
+    });
+});
+
+app.get(["/galerie"], function(req, res){
+    res.render("pagini/galerie", {
+        imagini: obGlobal.obImagini.imagini
     });
 });
 
 // app.get("/despre", function(req, res){
 //     res.render("pagini/despre");
 // });
+
+// app.get("/produse", function(req, res){
+//     client.query("select * from prajituri", function(err, rez){
+    //     if (err){
+    //         console.log("Eroare", err)
+    //         afisareEroare(res, 2)
+    //     }
+    //     else{
+    //         res.render("pagini/produse", {
+    //             produse: rez.rows,
+    //             optiuni: []
+    //         });
+    //     }
+//     })
+// })
+
+// app.get("/produs/:id", function(req, res){
+//     client.query(`select * from prajituri where id=${req.params.id}`, function(err, rez){
+    //     if (err){
+    //         console.log("Eroare", err)
+    //         afisareEroare(res, 2)
+    //     }
+    //     else{
+    //      if (rez.rowsCount==0){
+    //         afisareEroare(res, 404, "Produs inexistent");
+    //      }
+    //      else{    
+    //         res.render("pagini/produs", {
+    //             produse: rez.prod,
+    //             optiuni: []
+    //         });
+    //     }}
+//     })
+// })
 
 function valideazaErori() {
     const caleJson = path.join(__dirname, "Resurse/Json/erori.json");
@@ -168,6 +233,41 @@ app.get("/cale2/:a/:b", function(req, res){
     res.send(parseInt(req.params.a)+parseInt(req.params.b));
 });
 
+function initImagini(){
+    var continut= fs.readFileSync(path.join(__dirname,"Resurse/Json/galerie.json")).toString("utf-8");
+
+    obGlobal.obImagini=JSON.parse(continut);
+    let vImagini=obGlobal.obImagini.imagini;
+    let caleGalerie=obGlobal.obImagini.cale_galerie
+
+    let caleAbs=path.join(__dirname,caleGalerie);
+    let caleAbsMediu=path.join(caleAbs, "mediu");
+    let caleAbsMic=path.join(caleAbs, "mic");
+    if (!fs.existsSync(caleAbsMediu))
+        fs.mkdirSync(caleAbsMediu);
+
+    if (!fs.existsSync(caleAbsMediu))
+        fs.mkdirSync(caleAbsMediu);
+
+    if (!fs.existsSync(caleAbsMic))
+        fs.mkdirSync(caleAbsMic);
+    
+    for (let imag of vImagini){
+        [numeFis, ext]=imag.cale_fisier.split("."); //"ceva.png" -> ["ceva", "png"]
+        let caleFisAbs=path.join(caleAbs,imag.cale_fisier);
+        let caleFisMediuAbs=path.join(caleAbsMediu, numeFis+".webp");
+        let caleFisMicAbs=path.join(caleAbsMic, numeFis+".webp");
+        sharp(caleFisAbs).resize(300).toFile(caleFisMediuAbs);
+        sharp(caleFisAbs).resize(200).toFile(caleFisMicAbs);
+        imag.fisier_mic=path.join("/", caleGalerie, "mic", numeFis+".webp" )
+        imag.fisier_mediu=path.join("/", caleGalerie, "mediu", numeFis+".webp" )
+        imag.cale_fisier=path.join("/", caleGalerie, imag.cale_fisier )
+        
+    }
+    // console.log(obGlobal.obImagini)
+}
+initImagini();
+
 function compileazaScss(caleScss, caleCss){
     if(!caleCss){
 
@@ -236,7 +336,7 @@ app.get("/*pagina", function(req, res){
             }
             else{
                 res.send(rezRandare);
-                console.log("Rezultat randare", rezRandare);
+                // console.log("Rezultat randare", rezRandare);
             }
         });
     }
