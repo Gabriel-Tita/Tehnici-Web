@@ -21,14 +21,14 @@
 			"titlu":"Tort cu scorțisoară",
 			"alt":"text alternativ imagine",
 			"text_descriere":"Tort cu scorțisoară",
-			"luni":["noiembrie","aprilie", "decembrie"]
+			"luni":["noiembrie","mai", "decembrie"]
 		},
 		{
 			"cale_fisier":"prajitura-ciocolata.png",
 			"titlu":"Prăjitură cu ciocolată",
 			"alt":"text alternativ imagine",
 			"text_descriere":"Prăjitură cu ciocolată",
-			"luni":["noiembrie","aprilie", "decembrie","octombrie"]
+			"luni":["noiembrie","mai", "decembrie","octombrie"]
 		},
 		{
 			"cale_fisier":"tarta-afine.png",
@@ -49,21 +49,21 @@
 			"titlu":"Ecran telefon",
 			"alt":"text alternativ imagine",
 			"text_descriere":"Clătite cu dulceață",
-			"luni":["ianuarie","februarie", "aprilie", "iunie","octombrie"]
+			"luni":["ianuarie","februarie", "mai", "iunie","octombrie"]
 		},
 		{
 			"cale_fisier":"Iphone5.png",
 			"titlu":"Clătite cu dulceață",
 			"alt":"text alternativ imagine",
 			"text_descriere":"Clătite cu dulceață",
-			"luni":["ianuarie","februarie", "aprilie", "iunie","octombrie"]
+			"luni":["ianuarie","februarie", "mai", "iunie","octombrie"]
 		},
 		{
 			"cale_fisier":"Iphone6.png",
 			"titlu":"Clătite cu dulceață",
 			"alt":"text alternativ imagine",
 			"text_descriere":"Clătite cu dulceață",
-			"luni":["ianuarie","februarie", "aprilie", "iunie","octombrie"]
+			"luni":["ianuarie","februarie", "mai", "iunie","octombrie"]
 		},
 		{
 			"cale_fisier":"motorola.png",
@@ -98,7 +98,7 @@
 			"titlu":"Clătite cu dulceață",
 			"alt":"text alternativ imagine",
 			"text_descriere":"Clătite cu dulceață",
-			"luni":["ianuarie", "februarie", "aprilie", "iunie","octombrie"],
+			"luni":["ianuarie", "februarie", "mai", "iunie","octombrie"],
 			"autor": "Sean MacEntee",
 			"sursa": "https://www.flickr.com/photos/18090920@N07/9914804973",
 			"licenta": "CC-BY 2.0"

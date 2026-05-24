@@ -61,6 +61,51 @@ main video {
     padding: var(--paddig_margini);
 }
 
+body.dark{
+    --culoare_fundal: #0F172A;     
+    --culoare_fundal2: #1E293B;    
+    --culoare3: #104157;           
+     --culoare_iconite: #06B6D4;    
+    --culoare_hover: #34D399;      
+    --culoare_borduri: #334155;    
+    --culoare_plus: #F8FAFC;  
+    color: var(--culoare_plus); 
+}
+
+body {
+    .clasa-luna {
+        display: none !important; 
+    }
+    .clasa-soare {
+        display: inline-block !important; 
+    }
+}
+
+body.dark {
+    .clasa-soare {
+        display: none !important;
+    }
+    .clasa-luna {
+        display: inline-block !important; 
+    }
+}
+
+/* .testbuton{
+    background-color: var(--culoare_borduri);    
+}
+
+.testbuton:hover {
+    background-color: var(--culoare_borduri) !important;
+    border-color: var(--culoare_borduri) !important;
+}
+
+body.dark {
+    .testbuton:checked + .testbuton {
+        background-color: var(--culoare3) !important; 
+        border-color: var(--culoare3) !important;
+    }
+} */
+
 main,
 header,
 footer {
@@ -336,7 +381,7 @@ math msqrt {
 }
 
 a:visited{
-    color: var(--culoare_fundal);
+    color: var(--culoare_hover);
 }
 
 a[href^="http"]::before {
@@ -349,7 +394,7 @@ a[href^="http"]::before {
 }
 
 a[href^="http"]:hover::before{
-    color: var(--culoare_fundal);
+    color: var(--culoare_hover);
 }
 
 main a {
@@ -379,6 +424,8 @@ main a:hover {
 main a:hover{
     border: 1px solid black;
 }
+
+
 
 .video-responsiv {
     width: 90%;          /* Ocupă 90% din lățimea ecranului pe mobil */

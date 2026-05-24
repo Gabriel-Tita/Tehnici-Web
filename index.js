@@ -5,7 +5,7 @@ const sass=require("sass");
 const sharp=require("sharp");
 
 // // const ejs=require('ejs');
-// const pg = require("pg");
+const pg = require("pg");
 
 app=express();
 app.set("view engine", "ejs")
@@ -16,6 +16,7 @@ obGlobal={
     folderScss: path.join(__dirname, "Resurse/Scss"),
     folderCss: path.join(__dirname, "Resurse/CSS"),
     folderBackup: path.join(__dirname, "Backup"),
+    //optiunimeniu
 }
 
 console.log("Folder index.js", __dirname);
@@ -26,17 +27,16 @@ console.log("Cale fisier", __filename);
 //     res.sendFile(path.join(__dirname, "Resurse/CSS/general.css"))
 // });
 
-// client=new pg.Client({
-//     database:"mobilehub",
-//     user:"gabriel",
-//     password:"gabriel",
-//     host:"localhost",
-//     port:5433
-// })
+client=new pg.Client({
+    database:"mobilehub",
+    user:"gabriel",
+    password:"gabriel",
+    host:"localhost",
+    port:5432 //5433
+})
+client.connect()
 
-// client.connect()
-
-// client.query("select * from prajituri where id>3", function(err, rez){
+// client.query("select * from telefoane where id>3", function(err, rez){
 //     if (err){
 //         console.log("Eroare", err)
 //     }
@@ -65,6 +65,30 @@ app.get("/favicon.ico", function(req, res){
     res.sendFile(path.join(__dirname, "Resurse/Imagini/Favicon/favicon.ico"))
 });
 
+/*client.query("select * from unnest(enum_range(null::categ_prajitura))", function(err, rez){
+    if (err){
+        console.log("Eroare", err)
+    }
+    else{
+        console.log(rez)
+        obGlobal.optiuniMeniu=rez.rows
+    }
+})*/
+
+
+app.use(function(req, res, next){
+    client.query("select * from unnest(enum_range(null::categ_telefon))", function(err, rezOptiuni){
+        if (err){
+            afisareEroare(res, 2)
+        }
+        else{
+            res.locals.optiuniMeniu=rezOptiuni.rows;
+            next();
+        }
+    })
+})  
+
+
 app.get(["/", "/index", "/home"], function(req, res){
     //res.sendFile(path.join(__dirname, "index.html"));
     res.render("pagini/index", {
@@ -72,6 +96,123 @@ app.get(["/", "/index", "/home"], function(req, res){
         imagini: obGlobal.obImagini.imagini
     });
 });
+
+
+app.get("/produse", function(req, res){
+    let clauzaWhere="";
+    if(req.query.tip)
+        clauzaWhere=` where tip_telefon='${req.query.tip}'`
+    client.query(`select * from telefoane ${clauzaWhere}`, function(err, rez){
+        if (err){
+            console.log("Eroare", err)
+            afisareEroare(res, 2)
+        }
+        else{
+            client.query("select * from unnest(enum_range(null::categ_telefon))", function(err, rezOptiuni){
+                if (err){
+                    afisareEroare(res, 2)
+                }
+                else{
+                    let toateProdusele=rez.rows;
+
+                    let vectorPreturi=toateProdusele.map(prod => parseFloat(prod.pret));
+                    let pretMinim=vectorPreturi.length > 0 ? Math.min(...vectorPreturi) : 0;
+                    let pretMaxim=vectorPreturi.length > 0 ? Math.max(...vectorPreturi) : 0;
+
+                    let exempluNume=rez.rows[0]?.nume || "";
+                    
+                    let prodless8gb=0, prodless12gb=0, prodless32gb=0;
+                    for(let prod of toateProdusele){
+                        if (prod.memorie_ram<8){
+                            prodless8gb++;
+                        }
+                        else if (prod.memorie_ram<12){
+                            prodless12gb++;
+                        }
+                        else{
+                            prodless32gb++;
+                        }
+                    }
+                    
+                    let continutSet = new Set();
+                    toateProdusele.forEach(prod => {
+                        if(prod.continut) {
+                            prod.continut.forEach(a => {
+                                if(a&&a.trim().length > 0) {
+                                    continutSet.add(a.trim());
+                                }
+                            })
+                        }
+                    })
+                    let vecAccesorii=Array.from(continutSet);
+
+                    let continutCulori = new Set();
+                    toateProdusele.forEach(prod => {
+                        if(prod.culoare) {
+                            continutCulori.add(prod.culoare.trim());
+                        }
+                    })
+                    let vecCulori=Array.from(continutCulori);
+
+                    let Branduri=new Set();
+                    toateProdusele.forEach(prod => {
+                        if(prod.brand){
+                            Branduri.add(prod.brand.trim());
+                        }
+                    })
+                    let vecBrand=Array.from(Branduri);
+
+                    let Anilansare=new Set();
+                    toateProdusele.forEach(prod => {
+                        if(prod.an_lansare){
+                            Anilansare.add(prod.an_lansare);
+                        }
+                    })
+                    let Ani=Array.from(Anilansare);
+                    Ani.sort();
+
+                    let descriereexemplu = toateProdusele[0].descriere
+
+                    res.render("pagini/produse", {
+                        produse: rez.rows,
+                        optiuni: rezOptiuni.rows,
+                        pretMinim: pretMinim,
+                        pretMaxim: pretMaxim,
+                        exempluNume: exempluNume,
+                        prodless8gb: prodless8gb,
+                        prodless12gb: prodless12gb,
+                        prodless32gb: prodless32gb,
+                        accesorii: vecAccesorii,
+                        culori: vecCulori,
+                        branduri: vecBrand,
+                        ani: Ani,
+                        descrieretest: descriereexemplu
+                    })
+                }
+            })
+        }
+    })
+})
+
+app.get("/produs/:id", function(req, res){
+    client.query(`select * from telefoane where id=${req.params.id}`, function(err, rez){
+    if (err){
+        console.log("Eroare", err)
+        afisareEroare(res, 2)
+    }
+    else{
+        if(rez.rowCount==0){
+            afisareEroare(res, 404, "Produs inexistent")
+        }
+        else
+        {
+            res.render("pagini/produs", {
+                prod: rez.rows[0],
+            })
+        }
+    }
+})
+})
 
 app.get(["/galerie"], function(req, res){
     res.render("pagini/galerie", {
@@ -127,7 +268,7 @@ function valideazaErori() {
 
     const textJson = fs.readFileSync(caleJson, "utf-8");
 
-    let regexDuplicat = /"(\w+)":(?=[^}]*?"\1":)/g; 
+    let regexDuplicat = /"(\w+)":(?=[^}]*?"\1":)/g;     
     let match;
     while ((match = regexDuplicat.exec(textJson)) !== null) {
         console.error(`Proprietatea "${match[1]}" e duplicată într-un obiect!`);

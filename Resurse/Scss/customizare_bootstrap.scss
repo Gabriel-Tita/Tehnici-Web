@@ -1,7 +1,10 @@
+$culoare1: #667FFA;
+$culoare2: #66DCFA; 
+
 @use '../../node_modules/bootstrap/scss/bootstrap.scss' with 
 (
-    $primary: #66FAE8,
-    $secondary: #66AEFA,  // Mov pentru tema Secondary
+    $primary: #66AEFA,
+    $secondary: #667FFA, 
     $font-family-sans-serif: (Georgia, serif),
     $font-family-base: (Georgia, serif),
     $grid-breakpoints: (
@@ -21,9 +24,31 @@
     $h2-font-size: 2rem,      
     $h3-font-size: 1.5rem, 
 
-    $spacer: 1.5rem 
+    $spacer: 1.5rem, 
 
+    // Cerință: Raza (border-radius) și grosimea borderului date prin variabile
+    $btn-border-radius: 20px,         // Schimbă raza butoanelor
+    $input-border-radius: 12px,       // Schimbă raza inputurilor
+
+    $btn-border-width: 3px,  
+    $input-border-width: 3px,
+
+    $input-border-color: $culoare1,
+
+
+    $form-range-thumb-width: 1.5rem,
+    $form-range-thumb-height: 1.5rem,
+    $form-range-thumb-bg: $culoare1,
+    $form-range-track-bg: $culoare2,          
 );  
+
+.btn{
+    border-color: $culoare1;
+}
+
+// .form-control {
+//     border-color: #667FFA !important;
+// }
 
 .tab-links {
     background-color: var(--bs-primary) !important;

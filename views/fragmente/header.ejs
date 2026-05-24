@@ -1,4 +1,5 @@
-    <header>
+<script src="/Resurse/Js/tema.js"></script>
+<header>
         <h1> MobileHub </h1>
         <img src="/Resurse/Imagini/sunriseforever-smartphone-4103051_1920.jpg" height=50 width=50 alt="Sigla" />
         <nav>
@@ -31,13 +32,12 @@
 
                 </li>
                 <li>
-                    <div><div class="text-icon">Magazin&nbsp;</div><div class="imag-icon"><span class="fa-solid fa-mobile"></span></div></div>
+                    <a href="/produse"><div class="text-icon">Produse&nbsp;</div><div class="imag-icon"><span class="fa-solid fa-mobile"></span></div></a>
                     <ul>
-                        <li><a href="Magazin.html#Toate">Toate Telefoanele</a></li>
-                        <li><a href="Magazin.html#Samsung">Samsung</a></li>
-                        <li><a href="Magazin.html#Apple">Apple</a></li>
-                        <li><a href="Magazin.html#Motorola">Motorola</a></li>
-                        <li><a href="Magazin.html#Oppo">Oppo</a></li>
+                        <li><a href="/produse">Toate</a></li>
+                        <% for(let opt of optiuniMeniu){ %>
+                            <li><a href="/produse?tip=<%= opt.unnest %>"><%= opt.unnest.charAt(0).toUpperCase() + opt.unnest.slice(1) %></a></li>
+                        <% } %>
                     </ul>
                 </li>
                 <li><a href="Cos.html"><div class="text-icon">Cos de cumparaturi&nbsp;  </div><div class="imag-icon"><span class="fa-solid fa-cart-shopping"></span></div></a></li>
@@ -45,4 +45,34 @@
                 <li><a href="galerie"><div class="text-icon">Galerie&nbsp;</div><div class="imag-icon"><span class="fa-solid fa-image"></span></div></a></li>
             </ul>
         </nav>
+
+        <br>
+
+
+        <div class="d-flex my-2 justify-content-start">
+            <input type="checkbox" class="btn-check" id="schimba_tema" autocomplete="off">
+            
+            <label class="testbuton btn btn-outline-primary rounded-circle p-2 d-inline-flex align-items-center justify-content-center" 
+                for="schimba_tema" 
+                style="width: 40px; height: 40px;" 
+                title="Schimbă tema">
+                
+                <i class="bi bi-sun-fill text-warning fs-5 clasa-soare"></i>
+                <i class="bi bi-moon-stars-fill text-warning fs-5 clasa-luna"></i>
+            </label>
+        </div>
+
+
+        <!-- <div class="d-flex align-items-center gap-2 my-2 justify-content-start">
+        <i class="bi bi-sun-fill text-warning fs-5"></i>
+        <div class="form-check form-switch mb-0">
+            <input class="form-check-input" type="checkbox" role="switch" id="schimba_tema" autocomplete="off">
+            <label class="form-check-label d-none" for="schimba_tema">Schimbă tema</label>
+        </div>
+        <i class="bi bi-moon-stars-fill text-primary fs-5"></i>
+        </div> -->
+
+
+        <!-- <button id="schimba_tema">Schimba tema</button> -->
+    
     </header>

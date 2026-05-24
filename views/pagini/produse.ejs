@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta name="keywords" content="MobileHub, Magazin de telefoane, telefoane, Samsung, Apple, Motorola, Oppo">
+    <meta name="description"
+        content="Locul ideal de unde sa achizitionati pentru cele mai noi telefoane, la preturi competitive.">
+
+    <title>MobileHub - Produse</title>
+
+    <%- include("../fragmente/head") %>
+
+        <link rel="stylesheet" href="/Resurse/Css/produse.css" type="text/css" />
+        <script type="text/javascript" src="/Resurse/Js/produse.js"></script>
+        <script type="text/javascript" src="/Resurse/Js/produse-cos.js"></script>
+
+</head>
+
+<body>
+
+
+    <%- include("../fragmente/header") %>
+
+        <main>
+            <div class="inceput">
+                <h2>Filtrare produse</h2>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    <div class="col">
+                        <label> Nume <input type="text" id="inp-nume" class="form-control form-control-md"
+                                placeholder="Ex: <%= locals.exempluNume %>"></label>
+                    </div>
+
+                    <div class="col"> Memorie Ram
+                        <p><label>Mica (memorie_ram &lt; 8) - <%= locals.prodless8gb %> produse
+                                    <input id="i_rad1" name="gr_rad" value="0:8" type="radio" />
+                            </label></p>
+                        <p><label>Medie (8 &le; memorie_ram &lt; 12) - <%= locals.prodless12gb %> produse
+                                    <input id="i_rad2" name="gr_rad" value="8:12" type="radio" />
+                            </label></p>
+                        <p><label>Mare (12 &le; memorie_ram &lt; 32) - <%= locals.prodless32gb %> produse
+                                    <input id="i_rad3" name="gr_rad" value="12:32" type="radio" />
+                            </label></p>
+                        <p><label>Toate
+                                <input id="i_rad4" checked name="gr_rad" value="toate" type="radio" />
+                            </label></p>
+                    </div>
+
+                    <div class="mb-3 col">
+                        <span class="d-block mb-2 font-weight-bold">Continut pachet</span>
+                        <div>
+                            <!-- <input type="checkbox" class="btn-check" id="i_cont1" name="gr_cont" value="Cablu" checked
+                                autocomplete="off">
+                            <label class="btn btn-outline-primary btn-md d-inline-flex align-items-center gap-2"
+                                for="i_cont1">
+                                <i class="bi bi-usb-c-fill"></i> Cablu
+                            </label>
+
+                            <input type="checkbox" class="btn-check" id="i_cont2" name="gr_cont" value="Incarcator"
+                                checked autocomplete="off">
+                            <label class="btn btn-outline-primary btn-md d-inline-flex align-items-center gap-2"
+                                for="i_cont2">
+                                <i class="bi bi-lightning-charge-fill"></i> Încărcător
+                            </label>
+
+                            <input type="checkbox" class="btn-check" id="i_cont3" name="gr_cont" value="Casti" checked
+                                autocomplete="off">
+                            <label class="btn btn-outline-primary btn-md d-inline-flex align-items-center gap-2"
+                                for="i_cont3">
+                                <i class="bi bi-headphones"></i> Căști
+                            </label>
+
+                            <input type="checkbox" class="btn-check" id="i_cont4" name="gr_cont" value="S-Pen" checked
+                                autocomplete="off">
+                            <label class="btn btn-outline-primary btn-md d-inline-flex align-items-center gap-2"
+                                for="i_cont4">
+                                <i class="bi bi-pencil-fill"></i> S-Pen
+                            </label> -->
+
+                            <% let dictionarIconite={ "cablu" : "bi-usb-c-fill" , "incarcator"
+                                : "bi-lightning-charge-fill" , "casti" : "bi-headphones" , "s-pen" : "bi-pencil-fill" };
+                                %>
+                                <% locals.accesorii.forEach((acc, index)=> { %>
+                                    <% let cheieIconita=acc.toLowerCase(); %>
+                                        <% let clasaIconita=dictionarIconite[cheieIconita] || "bi-box-seam-fill" ; %>
+                                            <input type="checkbox" class="btn-check" id="i_cont<%- index %>"
+                                                name="gr_cont" value="<%- acc %>" checked autocomplete="off">
+                                            <label
+                                                class="btn btn-outline-primary btn-md d-inline-flex align-items-center gap-2 mb-2"
+                                                for="i_cont<%- index %>">
+                                                <i class="bi <%- clasaIconita %>"></i> <%- acc %>
+                                            </label>
+                                            <% }) %>
+                        </div>
+                    </div>
+
+                    <div class="col">Culoare:
+                        <select id="i_selmult" multiple size="4">
+                            <!-- <option id="mult1" value="negru" selected>Negru</option>
+                            <option id="mult2" value="alb" selected>Alb</option>
+                            <option id="mult3" value="albastru" selected>Albastru</option>
+                            <option id="mult4" value="verde" selected>Verde</option>
+                            <option id="mult5" value="mov" selected>Mov</option>
+                            <option id="mult6" value="auriu" selected>Auriu</option> -->
+                            <% locals.culori.forEach((acc, index) => { %>
+                                <option id="mult<%- index%>" value="<%- acc %>" selected><%- acc %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+
+                    <div class="col">Alege Brand (Datalist):
+                        <label>
+                            <!-- Atributul list face legătura cu datalist-ul de mai jos -->
+                            <input type="text" id="inp-brand" list="lista-branduri" class="form-control form-control-md"
+                                placeholder="Tastați sau alegeți...">
+
+                            <datalist id="lista-branduri">
+                                <!-- <option value="Apple"></option>
+                                <option value="Samsung"></option>
+                                <option value="Motorola"></option>
+                                <option value="Oppo"></option>
+                                <option value="Xiaomi"></option>
+                                <option value="Honor"></option> -->
+                                <% locals.branduri.forEach(acc => { %>
+                                    <option value="<%- acc %>"></option>
+                                <% }) %>
+                            </datalist>
+                        </label>
+                    </div>
+
+
+                    <!-- <div class="col">
+                        <label> Pret: Min=0 <input type="range" id="inp-pret" value="0" min="0"
+                                max="15000"><span>Max=15000 </span><span id="infoRange">(0)</span> </label>
+                    </div> -->
+
+                    <div>
+                        <p class="d-block text-center">Pret(lei)</p>
+                        <label for="inp-pret" class="form-label font-weight-bold d-flex justify-content-between">
+                            <span>Min: <%- locals.pretMinim.toFixed(2) %></span>
+                            <input type="range" class="form-range w-50" id="inp-pret" value="0"
+                                min="<%- locals.pretMinim.toFixed(2) %>" max="<%- locals.pretMaxim.toFixed(2) %>">
+                            <span>Max: <%- locals.pretMaxim.toFixed(2) %></span>
+                        </label>
+                        <span class="text-primary font-weight-bold d-block text-center" id="infoRange">(<%-
+                                locals.pretMinim.toFixed(2) %>)</span>
+                    </div>
+
+
+                    <div>
+                        <label>An lansare:
+                            <select id="inp-an_lansare">
+                                <option id="sel-toate" selected value="toate">toate</option>
+                                <!-- <option id="sel-2024" value="2024">2024</option>
+                                <option id="sel-2025" value="2025">2025</option>
+                                <option id="sel-2026" value="2026">2026</option> -->
+
+                                <% locals.ani.forEach(acc => { %>
+                                    <option id="sel-<%- acc %> "value="<%- acc %>"><%- acc%></option>
+                                <% }) %>
+
+                                <!-- <% for (let opt of locals.optiuni) { %>
+                    <option value="<%- opt.unnest %>"><%- opt.unnest %> </option>
+                <% } %> -->
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="form-floating mb-3 col">
+
+                        <textarea id="inp-text" rows="2" cols="20" class="form-control form-control-md"
+                            placeholder="Ex: <%- locals.descrieretest%>"></textarea>
+                        <label for="inp-text">Ex: <%- locals.descrieretest%></label>
+                    </div>
+                </div>
+
+                <br>
+
+                <p>
+                    <button class="filtrare btn btn-primary btn-md d-inline-flex align-items-center gap-2"
+                        id="filtrare"><i class="bi bi-funnel-fill"></i>
+                        <span class="d-none d-md-inline">Filtreaza</span></button>
+
+                    <button class="btn btn-primary btn-md d-inline-flex align-items-center gap-2" id="resetare"><i
+                            class="bi bi-arrow-counterclockwise"></i>
+                        <span class="d-none d-md-inline">Reseteaza</span></button><br />
+                    <button class="btn btn-primary btn-md d-inline-flex align-items-center gap-2" id="sortCrescNume"><i
+                            class="bi bi-sort-numeric-down"></i>
+                        <span class="d-none d-md-inline">Sorteaza crescator dupa pret si continut</span></button>
+                    <button class="btn btn-primary btn-md d-inline-flex align-items-center gap-2"
+                        id="sortDescrescNume"><i class="bi bi-sort-numeric-up-alt"></i><span
+                            class="d-none d-md-inline">Sorteaza descrescator dupa pret si continut</span></button>
+
+                </p>
+
+                <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
+
+            </div>
+
+            <p id="eroare-validare"></p>
+
+            <section id="produse">
+
+                <div id="no-products-message" class="hidden nothidden">
+                    <p>Nu există produse conform filtrării curente.</p>
+                </div>
+
+                <h2 id="mesajbun">Produse</h2>
+                <p id="numar-produse">20 produse</p>
+                <div class="grid-produse">
+                    <% for( let prod of locals.produse) { %>
+                        <% let clasaCategorie=prod.tip_telefon.replace(/\s+/g, "" ); %>
+                            <article class="produs <%- clasaCategorie %>">
+                                <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>"><span class="val-nume"><%-
+                                                prod.nume%></span></a></h3>
+                                <div class="ext">
+                                    <div class="test">
+                                        <table class="tabel-produse">
+                                            <thead>
+                                                <tr>
+                                                    <th id="th-pret">Pret</th>
+                                                    <th id="th-culoare">Culoare</th>
+                                                    <th id="th-functii">Continut</th>
+                                                    <th id="th-data-adaugare">Data sosirii in stoc</th>
+                                                    <th id="th-pliabil">Pliabil</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="pret"><span class="val-pret"><%- prod.pret%></span></td>
+                                                    <td class="culoare"><span class="val-culoare"><%-
+                                                                prod.culoare%></span></td>
+                                                    <td class="continut"><span class="val-functii"><%-
+                                                                prod.continut%></span></td>
+                                                    <!-- <p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span></p>
+                                    <p class="culoare">Culoare: <span class="val-culoare"><%- prod.culoare%></span></p>
+                                    <p class="functii">Functii: <span class="val-functii"><%- prod.functii%></span></p> -->
+
+                                                    <% const zileSaptamana=["Duminica", "Luni" , "Marti" , "Miercuri"
+                                                        , "Joi" , "Vineri" , "Sambata" ]; const
+                                                        luniAn=["Ianuarie", "Februarie" , "Martie" , "Aprilie" , "Mai"
+                                                        , "Iunie" , "Iulie" , "August" , "Septembrie" , "Octombrie"
+                                                        , "Noiembrie" , "Decembrie" ]; let d=new
+                                                        Date(prod.data_adaugare); let zi=d.getDate(); let
+                                                        an=d.getFullYear(); let numeZi=zileSaptamana[d.getDay()]; let
+                                                        numeLuna=luniAn[d.getMonth()]; let
+                                                        dataFinala=`${zi}(${numeZi})/${numeLuna}/${an}`; %>
+
+                                                        <td class="data_adaugare">
+                                                            <time datetime="<%- d.toISOString().split('T')[0] %>"><%-
+                                                                    dataFinala %></time>
+                                                        </td>
+                                                        <td class="pliabil"><span class="val-pliabil"><%-
+                                                                    prod.pliabil%></span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <figure class="imag-produs">
+                                        <a href="/produs/<%-prod.id %>"><img
+                                                src="/resurse/imagini/produse/<%- prod.imagine %>"
+                                                style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
+                                    </figure>
+
+                                </div>
+                                <p class="ram ascuns">Ram: <span class="val_ram"><%- prod.memorie_ram %></span></p>
+                                <p class="continut ascuns">Continut: <span class="val-continut"><%- prod.continut
+                                            %></span></p>
+                                <p class="an_lansare ascuns">An lansare: <span class="val-an_lansare"><%-
+                                            prod.an_lansare %></span></p>
+                                <p class="brand ascuns">Brand: <span class="val-brand"><%- prod.brand %></span></p>
+                                <p class="descriere"><span class="val-descriere"><%- prod.descriere %></span></p>
+                                <div class="categ"><span class="val-tip"><%- prod.tip_telefon.charAt(0).toUpperCase() +
+                                            prod.tip_telefon.slice(1) %></span></div>
+                                <div class="id">ent<span class="val-id"><%- prod.id %></span></div>
+                                <label class="selecteaza-cos">
+                                    Selectează:<br />
+                                    <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
+                                </label>
+                            </article>
+                            <% }%>
+                </div>
+            </section>
+        </main>
+
+        <%- include("../fragmente/footer") %>
+</body>
+
+</html>

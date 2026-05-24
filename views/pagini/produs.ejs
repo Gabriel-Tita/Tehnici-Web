@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html  lang="ro">
+    <head>
+        
+        <meta name="keywords" content="MobileHub, Magazin de telefoane, telefoane, Samsung, Apple, Motorola, Oppo, Xiaomi, Honor, <%- locals.prod.nume %>">
+        <meta name="description" content="Locul ideal de unde sa achizitionati pentru cele mai noi telefoane, la preturi competitive.">
+
+        <title>MobileHub - <%- locals.prod.nume %></title>
+        <%- include("../fragmente/head") %>     
+        <link href="/resurse/css/produs.css" type="text/css" rel="stylesheet" />
+    </head>
+
+        <%- include("../fragmente/header") %>
+    <main>
+        <section>
+            <h2 id="titlu-pagina">Pagină produs</h2>
+                <article id="art-produs">
+                    <h3><span class="nume"><%- locals.prod.nume %></span></h3>
+                    <p>Pret: <span class="pret"><%- locals.prod.pret %> </span> Lei</p>
+                    <p>Descriere: <span class="descriere"><%- locals.prod.descriere %> </span></p>
+                    <p>Memorie RAM: <span class="memorie_ram"><%- locals.prod.memorie_ram %> </span>GB</p>
+                    <p>Tip telefon: <span class="tip_telefon"><%- locals.prod.tip_telefon %> </span></p>
+                    <p>An lansare: <span class="an_lansare"><%- locals.prod.an_lansare %> </span></p>
+                    <p>Culoare: <span class="culoare"><%- locals.prod.culoare %> </span></p>
+                    <p>Brand: <span class="brand"><%- locals.prod.brand %> </span></p>
+                    <p>Continut: <span class="continut"><%- locals.prod.continut %> </span></p>
+                    <p>Pliabil: <span class="pliabil"><%- locals.prod.pliabil %> </span></p>
+                    <p>Data adăugare: <span class="data_adaugare"><%- locals.prod.data_adaugare %> </span></p>
+                    <br>
+                    <figure class="imag-produs">
+                        <img  src="/resurse/imagini/produse/<%- locals.prod.imagine %>" alt="[imagine <%- locals.prod.nume %>]" />
+                    </figure>    
+                </article>
+            
+        </section>
+    </main>
+
+    <%- include("../fragmente/footer") %>
+    </body>
+</html>

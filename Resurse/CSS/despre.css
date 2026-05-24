@@ -53,7 +53,7 @@ hr {
   /* 1. scaleX(-1) îl întoarce 
      2. skewY(15deg) îl ridică simetric 
      3. translateX(-100%) îl trage înapoi să se lipească de stânga */
-  transform: scaleX(-1) skewY(-15deg) translateX(-100%);
+  transform: scaleX(-1) skewY(-16deg) translateX(-100%);
   padding-left: 300px;
 }
 

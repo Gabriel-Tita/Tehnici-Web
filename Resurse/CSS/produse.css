@@ -1,0 +1,206 @@
+body {
+    --culoare_fundal2: #66FAE8;
+    --culoare3: #66AEFA;
+    --culoare_iconite: #66DCFA;
+    --culoare_hover: #66FAB5;
+    --culoare_borduri: #667FFA;
+    --culoare_fundal: #F4F8F9;
+    --culoare_plus: black;
+    --margine_pagina: 70px;
+    --paddig_margini: 1rem;
+    background-color: var(--culoare_fundal);
+}
+
+main{
+    --padd-main:1rem;
+    padding-left:var(--padd-main);
+    padding-right:var(--padd-main);
+}
+
+.inceput{
+    padding: 1rem;
+    background-color: var(--culoare_fundal2);
+    border:3px solid var(--culoare_borduri);
+    border-radius: 0.5rem;
+}
+
+.produs{
+    border:3px solid var(--culoare_borduri);
+    background-color: var(--culoare_fundal2);
+}
+
+.form-floating > .form-control.is-invalid ~ label {
+    color: #dc3545 !important;
+}
+
+.descriere,
+.categ,
+.id, 
+.ram,
+.an_lansare,
+.brand
+{
+    justify-self: center;
+}
+
+#eroare-validare{
+    color: red; 
+    font-weight: bold; 
+    min-height: 1.5em;
+}
+
+.ascuns{
+    display:none;
+}
+
+.grid-produse{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap:1rem;
+}
+.test{
+    justify-self: center;
+    padding: 0.5rem;
+}
+.tabel-produse{
+    border-collapse: collapse;
+    padding-left: 0.5rem;
+}
+.tabel-produse th, 
+.tabel-produse td {
+    border: 2px solid var(--culoare_borduri);
+}
+
+.hidden{
+    display: none;
+}
+
+.nothidden{
+    justify-content: center;
+    font-size: 3rem;
+}
+
+#th-pret{
+    width: 75px;
+}
+
+#th-culoare{
+    width: 80px;
+}
+
+#th-functii{
+    width: 120px;
+}
+
+#th-data-adaugare{
+    width: 200px;
+}
+
+#th-pliabil{
+    width: 50px;
+}
+
+
+
+/* .grid-produse{
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-gap:1rem;
+} 
+
+.ext{
+    display: flex;         
+    flex-direction: row;   
+    align-items: center;  
+    gap: 10px;          
+    width: 100%;
+}
+.test{ 
+    width: 100%;
+    overflow-x: auto;
+    min-width: 250px;   
+} */
+
+
+
+.grid-produse .produs{
+    border-radius: 2rem;
+    box-shadow: 0px 0px 0.8rem 0.3rem grey;
+    overflow: hidden;
+}
+
+.grid-produse .produs h3{
+    background-color: var(--culoare3);
+    text-align: center;
+    margin-top: 0;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.grid-produse .produs h3 a{
+    color:black;
+}
+.grid-produse .produs h3 a:hover{
+    color:white;
+}
+.grid-produse .produs figure{
+    text-align: center;
+}
+.grid-produse .produs figure img{
+    border:1px solid grey
+}
+.grid-produse .produs .info-prod{
+    display:flex;
+    background-color: var(--culoare_fundal2);
+}
+.grid-produse .produs .info-prod p{
+    width:30%;
+    text-align:center;
+    font-weight:bold;
+}
+
+.grid-produse .produs p.categorie{
+
+    text-align:center;
+    font-weight:bold;
+}
+
+.info-produse{
+    background-color: var(--culoare_fundal);
+    padding:0.2rem;
+    box-shadow: 0px 0px 0.5rem 0.15rem grey;
+}
+
+.produs{
+    position: relative;
+}
+.selecteaza-cos{
+    display: inline-block;
+    background-color: var(--culoare_borduri);
+    position:absolute;
+    bottom:0.5rem;
+    right:0.5rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    padding:0.3rem;
+    border:1px solid transparent;
+}
+
+.selecteaza-cos:hover{
+    background-color: var(--culoare_fundal2);
+    
+    border:1px solid  var(--culoare_borduri);
+}
+
+.selectat{
+    color:green;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 600px){
+    .grid-produse{
+        display:grid;
+        grid-template-columns: 1fr;
+    }
+}
