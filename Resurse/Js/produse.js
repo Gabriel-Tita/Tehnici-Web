@@ -1,12 +1,9 @@
 window.onload = function() {
     
     document.getElementById("inp-text").oninput = function() {
-        // Dacă utilizatorul a scris ceva (valoarea nu mai e goală)
         if (this.value.trim() !== "") {
-            // Se corectează automat: ștergem clasa de eroare instantaneu
             this.classList.remove("is-invalid");
             
-            // Opțional: Curățăm și textul general de eroare dacă era din cauza textarei
             let mesajEroare = document.getElementById("eroare-validare");
             if (mesajEroare.innerHTML.includes("textarea")) {
                 mesajEroare.innerHTML = "";
@@ -149,6 +146,7 @@ window.onload = function() {
 
             let anLansare = prod.getElementsByClassName("val-an_lansare")[0].innerHTML.trim().toLowerCase()
             let cond4 = anLansare==inpAnLansare || inpAnLansare=="toate"
+            
             let brand = prod.getElementsByClassName("val-brand")[0].innerHTML.trim().toLowerCase()
 
             let continut = prod.getElementsByClassName("val-continut")[0].innerHTML.trim().toLowerCase()

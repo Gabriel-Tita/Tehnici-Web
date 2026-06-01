@@ -106,6 +106,18 @@ body.dark {
     }
 } */
 
+
+
+
+
+
+
+
+
+
+
+
+
 main,
 header,
 footer {
@@ -616,4 +628,61 @@ video::cue {
     margin-right: 2.5cm;
     margin-top: 2cm;
     margin-bottom: 2cm;
+}
+
+
+
+
+
+
+
+
+
+
+/* Animația și poziționarea fixă pentru banner */
+#banner {
+    /* Implicit pe ecrane mici: rămâne static în subsol, fără animație (Cerință!) */
+    position: static;
+    width: 100%;
+}
+
+/* Regula pentru ecrane mari (Desktop) */
+@media screen and (min-width: 992px) {
+    #banner {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 9999;
+        
+        /* Trimitem bannerul sub ecran și activăm animația de 3 secunde */
+        transform: translateY(100%);
+        animation: miscareBanner 3s ease-out forwards;
+    }
+}
+
+/* Etapele animației: urcare, bounce de 20px, așezare și schimbare culori */
+@keyframes miscareBanner {
+    0% {
+        transform: translateY(100%);
+        color: #ff3333; /* Text Roșu la început */
+    }
+    60% {
+        transform: translateY(-20px); /* Urcă cu 20px mai sus de graniță */
+        color: #ffcc00; /* Text Galben la mijloc */
+    }
+    100% {
+        transform: translateY(0); /* Cade perfect pe granița de jos */
+        color: #ffffff; /* Text Alb la final, unde și rămâne */
+    }
+}   
+
+@media screen and (max-width: 991px) {
+    #banner {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 9999;
+    }
 }

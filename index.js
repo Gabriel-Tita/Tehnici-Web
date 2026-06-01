@@ -7,6 +7,13 @@ const sharp=require("sharp");
 // // const ejs=require('ejs');
 const pg = require("pg");
 
+const AccesBD= require("./module_proprii/accesbd.js");
+const {Utilizator}=require("./module_proprii/utilizator.js")
+const Drepturi = require("./module_proprii/drepturi.js");
+
+const formidable = require("formidable");
+const session = require("express-session");
+
 app=express();
 app.set("view engine", "ejs")
 
@@ -36,6 +43,12 @@ client=new pg.Client({
 })
 client.connect()
 
+app.use(session({ // aici se creeaza proprietatea session a requestului (pot folosi req.session)
+    secret: 'abcdefg',//folosit de express session pentru criptarea id-ului de sesiune
+    resave: true,
+    saveUninitialized: false
+}));
+
 // client.query("select * from telefoane where id>3", function(err, rez){
 //     if (err){
 //         console.log("Eroare", err)
@@ -45,7 +58,7 @@ client.connect()
 //     }
 // })
 
-let vect_foldere=[ "temp", "logs", "backup", "fisiere_uploadate" ]
+let vect_foldere=[ "temp", "logs", "backup", "fisiere_uploadate" , "poze_uploadate" ]
 for (let folder of vect_foldere){
     let caleFolder=path.join(__dirname, folder);
     if (!fs.existsSync(caleFolder)) {
@@ -89,14 +102,45 @@ app.use(function(req, res, next){
 })  
 
 
-app.get(["/", "/index", "/home"], function(req, res){
+app.get(["/", "/index", "/home"], async function(req, res){
     //res.sendFile(path.join(__dirname, "index.html"));
-    res.render("pagini/index", {
+
+        let ultimulProdusVizitat = null;
+
+        // Citim DOAR cookie-ul pentru ultimul produs
+        if (req.headers.cookie) {
+            const listaCookies = req.headers.cookie.split(";");
+            
+            for (let cookie of listaCookies) {
+                let [nume, valoare] = cookie.split("=");
+                if (nume.trim() === "ultimul_produs") {
+                    ultimulProdusVizitat = decodeURIComponent(valoare);
+                    break; 
+                }
+            }
+        }
+
+        const rezultatAleator = await client.query("SELECT nume, imagine FROM telefoane ORDER BY RANDOM() LIMIT 5");
+        res.render("pagini/index", {
         ip: req.ip,
-        imagini: obGlobal.obImagini.imagini
+        imagini: obGlobal.obImagini.imagini,
+        produseAleatoare: rezultatAleator.rows,
+        ultimulProdus: ultimulProdusVizitat
     });
+    // res.render("pagini/index", {
+    //     ip: req.ip,
+    //     imagini: obGlobal.obImagini.imagini
+    // });
 });
 
+app.get("/api/produse-aleatoare", async (req, res) => {
+    try {
+        const rezultat = await client.query("SELECT nume, imagine FROM telefoane ORDER BY RANDOM() LIMIT 5");
+        res.json(rezultat.rows); // Returnează doar JSON pur
+    } catch (e) {
+        res.status(500).json({ eroare: "Eroare la DB" });
+    }
+});
 
 app.get("/produse", function(req, res){
     let clauzaWhere="";
@@ -168,8 +212,8 @@ app.get("/produse", function(req, res){
                             Anilansare.add(prod.an_lansare);
                         }
                     })
-                    let Ani=Array.from(Anilansare);
-                    Ani.sort();
+                    let vecAni=Array.from(Anilansare);
+                    vecAni.sort();
 
                     let descriereexemplu = toateProdusele[0].descriere
 
@@ -185,7 +229,7 @@ app.get("/produse", function(req, res){
                         accesorii: vecAccesorii,
                         culori: vecCulori,
                         branduri: vecBrand,
-                        ani: Ani,
+                        ani: vecAni,
                         descrieretest: descriereexemplu
                     })
                 }
@@ -246,10 +290,10 @@ app.get(["/galerie"], function(req, res){
     //         afisareEroare(res, 2)
     //     }
     //     else{
-    //      if (rez.rowsCount==0){
+    //     if (rez.rowsCount==0){
     //         afisareEroare(res, 404, "Produs inexistent");
-    //      }
-    //      else{    
+    //     }
+    //     else{    
     //         res.render("pagini/produs", {
     //             produse: rez.prod,
     //             optiuni: []
@@ -258,6 +302,12 @@ app.get(["/galerie"], function(req, res){
 //     })
 // })
 
+/**
+ * Validează structura și consistența fișierului de configurare a erorilor (erori.json).
+ * Verifică existența fișierului, duplicarea proprietăților prin regex, prezența cheilor obligatorii,
+ * validitatea sintactică și existența fizică a folderelor și imaginilor mapate pe erori.
+ * @returns {void} Oprește execuția procesului (process.exit) în caz de eroare critică structurală.
+ */
 function valideazaErori() {
     const caleJson = path.join(__dirname, "Resurse/Json/erori.json");
 
@@ -323,6 +373,11 @@ function valideazaErori() {
 }
 valideazaErori();
 
+/**
+ * Inițializează configurările de erori prin citirea fișierului JSON și maparea lor în obiectul global.
+ * Transformă căile relative ale imaginilor de eroare în căi absolute completate cu valoarea din 'cale_baza'.
+ * @returns {void}
+ */
 function initErori(){
     let continut = fs.readFileSync(path.join(__dirname,"Resurse/Json/erori.json")).toString("utf-8");
     let erori=obGlobal.obErori=JSON.parse(continut)
@@ -335,6 +390,15 @@ function initErori(){
 }
 initErori()
 
+/**
+ * Randeză și transmite pagina de eroare personalizată către client în funcție de un identificator HTTP primit.
+ * * @param {object} res - Obiectul de răspuns (Express Response) folosit pentru a trimite pagina.
+ * @param {number} identificator - Codul de status HTTP al erorii (ex: 404, 403, 500).
+ * @param {string} [titlu] - Titlu opțional care suprascrie textul implicit din JSON.
+ * @param {string} [text] - Descrierea opțională a erorii care suprascrie textul implicit din JSON.
+ * @param {string} [imagine] - Calea opțională a imaginii de eroare care suprascrie imaginea implicită din JSON.
+ * @returns {void}
+ */
 function afisareEroare(res, identificator, titlu, text, imagine){
     //to do cautam eroarea dupa identificator
     let eroare = obGlobal.obErori.info_erori.find((elem) => 
@@ -374,6 +438,12 @@ app.get("/cale2/:a/:b", function(req, res){
     res.send(parseInt(req.params.a)+parseInt(req.params.b));
 });
 
+/**
+ * Inițializează galeria de imagini prin citirea fișierului de configurare galerie.json.
+ * Creează submapele 'mic' și 'mediu' dacă nu există și generează versiuni optimizate de tip .webp
+ * ale imaginilor la rezoluții diferite (200px și 300px) utilizând modulul 'sharp'.
+ * @returns {void}
+ */
 function initImagini(){
     var continut= fs.readFileSync(path.join(__dirname,"Resurse/Json/galerie.json")).toString("utf-8");
 
@@ -409,6 +479,13 @@ function initImagini(){
 }
 initImagini();
 
+/**
+ * Compilează un fișier SCSS într-un fișier CSS utilizând compilatorul 'sass'.
+ * Realizează automat copii de backup în folderul de Backup înainte de scriere și generează source maps.
+ * * @param {string} caleScss - Calea (relativă sau absolută) către fișierul SCSS sursă.
+ * @param {string} [caleCss] - Calea opțională de destinație pentru fișierul CSS rezultat (dacă lipsește, se deduce din numele SCSS).
+ * @returns {void}
+ */
 function compileazaScss(caleScss, caleCss){
     if(!caleCss){
 
@@ -496,82 +573,182 @@ console.log("Serverul a pornit!");
 
 
 
-// const express= require("express");
-// const path= require("path");
-
-// app= express();
-// app.set("view engine", "ejs")
-
-// console.log("Folder index.js", __dirname);
-// console.log("Folder curent (de lucru)", process.cwd());
-// console.log("Cale fisier", __filename);
-
-// app.get("/", function(req, res) {
-//     res.render("pagini/index");
-// })
-
-// app.get("/cale", function(req, res) {
-//     console.log("Ruta /cale");
-//     res.send("Raspuns pentru <b style='color:red;'>ruta</b> /cale");
-// })
-
-// app.use("/resurse", express.static(path.join(__dirname, "resurse")));
-
-// app.use("/:a/:b", function(req,res) {
-//     console.log(parseInt(req.params.a) + parseInt(req.params.b));
-//     res.send();
-// })
-
-// app.get("/cale2", function(req, res) {
-//     res.write("123");
-//     res.write("456");
-//     res.end();
-// })
 
 
-// app.listen(8080);
-// console.log("Serverul a pornit!");
 
 
-/**
+// ------------------------- Utilizatori ----------------------
 
-function afisareEroare(res, identificator, titlu, text, imagine){
-    let eroare=obGlobal.obErori.info_erori.find((elem)=>elem.identificator==identificator);
-    let errDefault=obGlobal.obErori.eroare_default; 
-    if(eroare?.status){
-        res.status(eroare.identificator);
-    }
-    res.render("pagini/eroare",{
-        imagine: imagine || eroare?.imagine || errDefault.imagine,
-        titlu: titlu || eroare?.titlu || errDefault.titlu,
-        text: text || eroare?.text || err.Default.text,
+app.post("/inregistrare",function(req, res){
+    var username, poza;
+    var formular= new formidable.IncomingForm()
+    formular.parse(req, function(err, campuriText, campuriFisier ){//4
+        console.log("Inregistrare:",campuriText);
+        console.log("Campuri fisier:",campuriFisier);
+        console.log(poza, username);
+        var eroare="";
+        var utilizNou =new Utilizator();
+        try{
+            utilizNou.setareNume=campuriText.nume[0];
+            utilizNou.setareUsername=campuriText.username[0];
+            utilizNou.email=campuriText.email[0]
+            utilizNou.prenume=campuriText.prenume[0]
+            utilizNou.parola=campuriText.parola[0];
+            utilizNou.culoare_chat=campuriText.culoare_chat[0];
+            utilizNou.poza= poza;
+            Utilizator.getUtilizDupaUsername(campuriText.username[0], {}, function(u, parametru ,eroareUser ){
+                if (eroareUser==-1){
+                    utilizNou.salvareUtilizator()
+                }
+                else{
+                    eroare+="Mai exista username-ul";
+                }
+                if(!eroare){
+                    res.render("pagini/inregistrare", {raspuns:"Inregistrare cu succes!"})
+                }
+                else
+                    res.render("pagini/inregistrare", {err: "Eroare: "+eroare});
+            })
+        }
+        catch(e){
+            console.log(e);
+            eroare+= "Eroare site; reveniti mai tarziu";
+            res.render("pagini/inregistrare", {err: "Eroare: "+eroare})
+        }
+
     });
-}
-
-vect_foldere=["temp", "logs", "backup", "fisiere_uploadate"]
-
-for(let folder of vect_foldere){
-    let caleFolder = path.join(__dirname, folder);
-    if(!fs.existsSync(caleFolder)){
-        fs.mkdirSync(caleFolder), {recursivitate: true})l;
-    }
-}
-
-app.get("/eroare", function(req, res){
-    afisareEroare(res, 404, "Eroare 404 - Pagina nu a fost gasita");
+    formular.on("field", function(nume,val){  // 1
+        console.log(`--- ${nume}=${val}`);
+        if(nume=="username")
+            username=val;
+    })
+    formular.on("fileBegin", function(nume,fisier){ //2
+        var folderUser=path.join(__dirname, "poze_uploadate", username);
+        if (!fs.existsSync(folderUser))
+            fs.mkdirSync(folderUser)
+        fisier.filepath=path.join(folderUser, fisier.originalFilename)
+        poza=fisier.originalFilename;
+        console.log("fileBegin:",poza)
+        console.log("fileBegin, fisier:",nume, fisier)
+    })    
+    formular.on("file", function(nume,fisier){//3
+        console.log("file");
+        console.log(nume,fisier);
+    });
 });
 
-app.get("/*pagina", function(req, res){
-    console.log("Pagina ceruta", req.url);
-    try{
-        res.render("pagini" + req.url, function(err, rezRandare){
-        
+
+app.post("/login",function(req, res){
+    var username;
+    console.log("ceva");
+    var formular= new formidable.IncomingForm()
+    formular.parse(req, function(err, campuriText, campuriFisier ){
+        var parametriCallback= {
+            req:req,
+            res:res,
+            parola: campuriText.parola[0]
+        }
+        Utilizator.getUtilizDupaUsername (campuriText.username[0],parametriCallback, 
+            function(u, obparam, eroare ){ //proceseazaUtiliz
+            let parolaCriptata=Utilizator.criptareParola(obparam.parola)
+            if(u.parola== parolaCriptata && u.confirmat_mail){
+                u.poza=u.poza?path.join("poze_uploadate",u.username, u.poza):"";
+                obparam.req.session.utilizator=u;               
+                obparam.req.session.mesajLogin="Bravo! Te-ai logat!";
+                obparam.res.redirect("/index");
+                
+            }
+            else{
+                console.log("Eroare logare")
+                obparam.req.session.mesajLogin="Date logare incorecte sau nu a fost confirmat mailul!";
+                obparam.res.redirect("/index");
+            }
+        })
+    });
+    
+});
+
+app.get("/logout", function(req, res){
+    req.session.destroy();
+    res.locals.utilizator=null;
+    res.render("pagini/logout");
+});
+
+
+//http://${Utilizator.numeDomeniu}/cod/${utiliz.username}/${token}
+app.get("/cod/:username/:token",function(req,res){
+    try {
+        var parametriCallback={
+            req:req,
+            token:req.params.token
+        }
+        Utilizator.getUtilizDupaUsername(req.params.username,parametriCallback ,function(u,obparam){
+            let parametriCerere={
+                tabel:"utilizatori",
+                campuri:{confirmat_mail:true},
+                conditiiAnd:[`id=${u.id}`]
+            };
+            AccesBD.getInstanta().update(
+                parametriCerere, 
+                function (err, rezUpdate){
+                    if(err || rezUpdate.rowCount==0){
+                        console.log("Cod:", err);
+                        afisareEroare(res,3);
+                    }
+                    else{
+                        res.render("pagini/confirmare.ejs");
+                    }
+                })
         })
     }
+    catch (e){
+        console.log(e);
+        afisareEroare(res,2);
+    }
+})
+
+
+
+
+
+
+
+
+
+// -------------------- cererea generala -----------------------
+
+app.get("/*pagina", function(req, res){
+    console.log("Cale pagina", req.url);
+    if (req.url.startsWith("/resurse") && path.extname(req.url)==""){
+        afisareEroare(res,403);
+        return;
+    }
+    if (path.extname(req.url)==".ejs"){
+        afisareEroare(res,400);
+        return;
+    }
+    try{
+        res.render("pagini"+req.url, function(err, rezRandare){
+            if (err){
+                if (err.message.includes("Failed to lookup view")){
+                    afisareEroare(res,404)
+                }
+                else{
+                    afisareEroare(res);
+                }
+            }
+            else{
+                res.send(rezRandare);
+                //console.log("Rezultat randare", rezRandare);
+            }
+        });
+    }
     catch(err){
-        if(err.message.includes("Cannot find module")){
-            afisareEroare(res, 404);
+        if (err.message.includes("Cannot find module")){
+            afisareEroare(res,404)
+        }
+        else{
+            afisareEroare(res);
         }
     }
-}); 
-**/
+});
